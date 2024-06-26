@@ -2,7 +2,9 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import javax.swing.text.StyledEditorKit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -284,6 +286,290 @@ public class JavaTextEditor extends JFrame {
 
             }//end of the caretUpdate Method
         });//end of the Anonymous Caret Listener
+
+        /************************* create menubar and its attributes *************************/
+        menuBar = new JMenuBar();
+        this.setJMenuBar(menuBar);
+
+        /*********** create the menus, their attributes and add them to the menuBar ***********/
+        fileMenu = new JMenu("File");
+        editMenu = new JMenu("Edit");
+        viewMenu = new JMenu("View");
+        formatMenu = new JMenu("Format");
+        helpMenu = new JMenu("Help");
+
+        fileMenu.setFont(menuFont);
+        editMenu.setFont(menuFont);
+        viewMenu.setFont(menuFont);
+        formatMenu.setFont(menuFont);
+        helpMenu.setFont(menuFont);
+
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(viewMenu);
+        menuBar.add(formatMenu);
+        menuBar.add(helpMenu);
+
+        /** Create the Menu and MenuItem for the fileMenu */
+        printerMenu = new JMenu("Printer...");
+        printerMenu.setIcon(printerIcon);
+
+        newItem = new JMenuItem("New", newFileIcon);
+        openItem = new JMenuItem("Open", openFileIcon);
+        saveItem = new JMenuItem("Save", saveFileIcon);
+        saveAsItem = new JMenuItem("SaveAs...", saveAsFileIcon);
+        pageSetupItem = new JMenuItem("Page Setup", pageSetupIcon);
+        printItem = new JMenuItem("Print", printIcon);
+        previewPrintItem = new JMenuItem("Print Preview", printPreviewIcon);
+        exitItem = new JMenuItem("Exit", exitIcon);
+
+        printerMenu.setFont(menuItemFont);
+        newItem.setFont(menuItemFont);
+        openItem.setFont(menuItemFont);
+        saveItem.setFont(menuItemFont);
+        saveAsItem.setFont(menuItemFont);
+        pageSetupItem.setFont(menuItemFont);
+        printItem.setFont(menuItemFont);
+        previewPrintItem.setFont(menuItemFont);
+        exitItem.setFont(menuItemFont);
+
+        /** Shortcut KeyStrokes for JMenuItems for the fileMenu */
+        newItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+        openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+        saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
+        printItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, InputEvent.CTRL_MASK | InputEvent.ALT_DOWN_MASK));
+
+
+
+        /************************* fileMenu and add its menuItems *************************/
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.addSeparator();
+        fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(pageSetupItem);
+        fileMenu.add(printerMenu);
+        fileMenu.addSeparator();
+        printerMenu.add(printItem);
+        printerMenu.addSeparator();
+        printerMenu.add(previewPrintItem);
+        fileMenu.add(exitItem);
+
+        /************************* editMenu and add its menuItems *************************/
+        undoItem = new JMenuItem(undoAction);
+        redoItem = new JMenuItem(redoAction);
+        cutItem = new JMenuItem(cutAction);
+        copyItem = new JMenuItem(copyAction);
+        pasteItem = new JMenuItem(pasteAction);
+        deleteItem = new JMenuItem(deleteAction);
+        findItem = new JMenuItem(findAction);
+        findReplaceItem = new JMenuItem(findAndReplaceAction);
+        selectAllItem = new JMenuItem(selectAllAction);
+        dateTimeItem = new JMenuItem(dateAndTimeAction);
+
+        undoItem.setFont(menuItemFont);
+        redoItem.setFont(menuItemFont);
+        cutItem.setFont(menuItemFont);
+        copyItem.setFont(menuItemFont);
+        pasteItem.setFont(menuItemFont);
+        deleteItem.setFont(menuItemFont);
+        findItem.setFont(menuItemFont);
+        findReplaceItem.setFont(menuItemFont);
+        selectAllItem.setFont(menuItemFont);
+        dateTimeItem.setFont(menuItemFont);
+
+
+        /** Shortcut keystrokes for the editMenu JMenuItems */
+        undoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
+        redoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
+        cutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+        copyItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+        pasteItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
+        deleteItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
+        selectAllItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+
+        editMenu.add(undoItem);
+        editMenu.add(redoItem);
+        editMenu.addSeparator();
+        editMenu.add(cutItem);
+        editMenu.add(copyItem);
+        editMenu.add(pasteItem);
+        editMenu.add(deleteItem);
+        editMenu.addSeparator();
+        editMenu.add(findItem);
+        editMenu.add(findReplaceItem);
+        editMenu.addSeparator();
+        editMenu.add(selectAllItem);
+        editMenu.addSeparator();
+        editMenu.add(dateTimeItem);
+
+        /************* Create the CheckboxMenuItems for the viewMenu **************/
+        lineNumberCheckboxItem = new JCheckBoxMenuItem("Line Numbers", lineNumberIcon);
+        statusBarCheckboxItem = new JCheckBoxMenuItem("Status Bar", statusBarIcon);
+        wordWrapCheckboxItem = new JCheckBoxMenuItem("Word Wrap", wordWrapIcon);
+
+        lineNumberCheckboxItem.setFont(menuItemFont);
+        statusBarCheckboxItem.setFont(menuItemFont);
+        wordWrapCheckboxItem.setFont(menuItemFont);
+
+        lineNumberCheckboxItem.setSelected(hasLineNumbers);
+        statusBarCheckboxItem.setSelected(hasStatusBar);
+        wordWrapCheckboxItem.setSelected(hasWordWrap);
+
+        viewMenu.add(lineNumberCheckboxItem);
+        viewMenu.addSeparator();
+        viewMenu.add(statusBarCheckboxItem);
+        viewMenu.addSeparator();
+        viewMenu.add(wordWrapCheckboxItem);
+
+        /************* Create the Menus and MenuItems for the formatMenu *************/
+        fontMenu = new JMenu("Fonts...");
+        alignMenu = new JMenu("Alignments...");
+        colorMenu = new JMenu("Colors...");
+
+        fontMenu.setIcon(fontIcon);
+        alignMenu.setIcon(alignIcon);
+        colorMenu.setIcon(colorsIcon);
+
+        fontMenu.setFont(menuItemFont);
+        alignMenu.setFont(menuItemFont);
+        colorMenu.setFont(menuItemFont);
+
+        formatMenu.add(fontMenu);
+        formatMenu.addSeparator();
+        formatMenu.add(alignMenu);
+        formatMenu.addSeparator();
+        formatMenu.add(colorMenu);
+
+
+        fontItem = new JMenuItem(new JavaTextEditorFontChooserAction());
+        boldItem = new JMenuItem(new StyledEditorKit.BoldAction());
+        italicItem = new JMenuItem(new StyledEditorKit.ItalicAction());
+        underlineItem = new JMenuItem(new StyledEditorKit.UnderlineAction());
+        subscriptItem = new JMenuItem(new SubscriptAction());
+        superscriptItem = new JMenuItem(new SuperscriptAction());
+        strikeThroughItem = new JMenuItem(new StrikeThroughAction());
+
+        fontItem.setFont(menuItemFont);
+        boldItem.setFont(menuItemFont);
+        italicItem.setFont(menuItemFont);
+        underlineItem.setFont(menuItemFont);
+        subscriptItem.setFont(menuItemFont);
+        superscriptItem.setFont(menuItemFont);
+        strikeThroughItem.setFont(menuItemFont);
+
+        fontItem.setText("Fonts");
+        boldItem.setText("Bold");
+        italicItem.setText("Italic");
+        underlineItem.setText("Underline");
+        subscriptItem.setText("Subscript");
+        superscriptItem.setText("Superscript");
+        strikeThroughItem.setText("Strikethrough");
+
+        fontItem.setIcon(fontsIcon);
+        boldItem.setIcon(boldIcon);
+        italicItem.setIcon(italicIcon);
+        underlineItem.setIcon(underlineIcon);
+        subscriptItem.setIcon(subscriptIcon);
+        superscriptItem.setIcon(superscriptIcon);
+        strikeThroughItem.setIcon(strikeThroughIcon);
+
+        /** Shortcut KeyStroke for the JMenuItems in formatMenu */
+        fontItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.CTRL_MASK));
+        boldItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        italicItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        underlineItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        subscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.CTRL_MASK));
+        superscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.CTRL_MASK));
+        strikeThroughItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, InputEvent.CTRL_MASK));
+
+        fontMenu.add(fontItem);
+        fontMenu.addSeparator();
+        fontMenu.add(boldItem);
+        fontMenu.addSeparator();
+        fontMenu.add(italicItem);
+        fontMenu.addSeparator();
+        fontMenu.add(underlineItem);
+        fontMenu.addSeparator();
+        fontMenu.add(subscriptItem);
+        fontMenu.addSeparator();
+        fontMenu.add(superscriptItem);
+        fontMenu.addSeparator();
+        fontMenu.add(strikeThroughItem);
+
+        /** AlignMenu and its JMenuItems and their attributes */
+        alignLeftItem = new JMenuItem(new StyledEditorKit.AlignmentAction("Left Alignment", StyleConstants.ALIGN_LEFT));
+        alignCenterItem = new JMenuItem(new StyledEditorKit.AlignmentAction("Center Alignment", StyleConstants.ALIGN_CENTER));
+        alignRightItem = new JMenuItem(new StyledEditorKit.AlignmentAction("Right Alignment", StyleConstants.ALIGN_RIGHT));
+        alignJustifyItem = new JMenuItem(new StyledEditorKit.AlignmentAction("Justify Alignment", StyleConstants.ALIGN_JUSTIFIED));
+
+        alignLeftItem.setIcon(alignLeftIcon);
+        alignCenterItem.setIcon(alignCenterIcon);
+        alignRightItem.setIcon(alignRightIcon);
+        alignJustifyItem.setIcon(alignJustifyIcon);
+
+        alignLeftItem.setFont(menuItemFont);
+        alignCenterItem.setFont(menuItemFont);
+        alignRightItem.setFont(menuItemFont);
+        alignJustifyItem.setFont(menuItemFont);
+
+        alignMenu.add(alignLeftItem);
+        alignMenu.addSeparator();
+        alignMenu.add(alignCenterItem);
+        alignMenu.addSeparator();
+        alignMenu.add(alignRightItem);
+        alignMenu.addSeparator();
+        alignMenu.add(alignJustifyItem);
+
+        /** ColorMenu and its JMenuItems and their attributes */
+        colorBlackItem = new JMenuItem(new StyledEditorKit.ForegroundAction("Black", Color.decode("#2e2e2e")));
+        colorBlueItem = new JMenuItem(new StyledEditorKit.ForegroundAction("Blue", Color.decode("#377099")));
+        colorRedItem = new JMenuItem(new StyledEditorKit.ForegroundAction("Red", Color.decode("#a50303")));
+        moreColorsItem = new JMenuItem("More Colors...", moreColorsIcon);
+
+        colorBlackItem.setIcon(colorBlackIcon);
+        colorBlueItem.setIcon(colorBlueIcon);
+        colorRedItem.setIcon(colorRedIcon);
+
+        colorBlackItem.setForeground(Color.decode("#2e2e2e"));
+        colorBlackItem.setFont(menuItemFont);
+        colorBlueItem.setForeground(Color.decode("#377099"));
+        colorBlueItem.setFont(menuItemFont);
+        colorRedItem.setForeground(Color.decode("#a50303"));
+        colorRedItem.setFont(menuItemFont);
+        moreColorsItem.setFont(menuItemFont);
+
+        moreColorsItem.addActionListener(new JavaTextEditorColorChooser());
+
+        colorMenu.add(colorBlackItem);
+        colorMenu.addSeparator();
+        colorMenu.add(colorBlueItem);
+        colorMenu.addSeparator();
+        colorMenu.add(colorRedItem);
+        colorMenu.addSeparator();
+        colorMenu.add(moreColorsItem);
+
+        /************************* helpMenu and its menuItems *************************/
+        //Create the MenuItem for the helpMenu
+        helpItem = new JMenuItem("View Help", helpIcon);
+        aboutItem = new JMenuItem("About Editor", aboutIcon);
+
+        //helpMenu.add(new AboutDialogAction(this, "About", true));
+        helpItem.setFont(menuItemFont);
+        aboutItem.setFont(menuItemFont);
+
+        /** Shortcut KeyStroke for the JMenuItem in the helpMenu */
+        helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.CTRL_MASK));
+        helpItem.addActionListener(new HelpDialog(this, "View Help", true));
+        aboutItem.addActionListener(new AboutDialog(this, "About Editor", true));
+        aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.CTRL_MASK));
+
+        helpMenu.add(helpItem);
+        helpMenu.addSeparator();
+        helpMenu.add(aboutItem);
 
 
     }//end of initComponents Method
