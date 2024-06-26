@@ -13,7 +13,7 @@ public class ExitAction extends AbstractAction {
         super("Exit", icon);
         setEnabled(true);
 
-    }//end of the CopyAction Constructor
+    }//end of the ExitAction Constructor
 
     public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
 
