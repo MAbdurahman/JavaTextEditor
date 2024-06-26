@@ -57,7 +57,7 @@ public class JavaTextEditor extends JFrame {
     /** MenuItems for the editMenu */
     protected JMenuItem undoItem, redoItem;
     static JMenuItem cutItem, copyItem, deleteItem, pasteItem, findItem, findReplaceItem;
-    protected JMenuItem selectAllItem, dateTimeItem;
+    static JMenuItem selectAllItem, dateTimeItem;
 
     /** MenuItems for the viewMenu */
     protected JCheckBoxMenuItem lineNumberCheckboxItem;
