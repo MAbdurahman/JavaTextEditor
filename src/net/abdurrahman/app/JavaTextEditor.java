@@ -1,12 +1,8 @@
 package net.abdurrahman.app;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.*;
-import javax.swing.text.DateFormatter;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import javax.swing.text.StyledEditorKit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -16,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * JavaTextEditor -
@@ -83,6 +78,19 @@ public class JavaTextEditor extends JFrame {
     protected UndoManager undoManager;
     protected UndoAction undoAction;
     protected RedoAction redoAction;
+
+    /** CopyAction, CutAction, PasteAction */
+    protected CutAction cutAction;
+    protected CopyAction copyAction;
+    protected PasteAction pasteAction;
+
+    /** DateAndTimeAction, DeleteAction, SelectAllAction */
+    protected SelectAllAction selectAllAction;
+    protected DateAndTimeAction dateAndTimeAction;
+    protected DeleteAction deleteAction;
+    /** FindAction, FindAndReplaceAction */
+    protected FindAction findAction;
+    protected FindAndReplaceAction findAndReplaceAction;
 
 
     /**
@@ -198,6 +206,22 @@ public class JavaTextEditor extends JFrame {
         hasWordWrap = true;
 
 
+        /** Initialization of UndoManager, undoAction, and redoAction */
+        undoManager = new UndoManager();
+        undoAction = new UndoAction(undoIcon);
+        redoAction = new RedoAction(redoIcon);
+        cutAction = new CutAction(cutIcon);
+        copyAction = new CopyAction(copyIcon);
+        deleteAction = new DeleteAction(deleteIcon);
+        try {
+            pasteAction = new PasteAction(pasteIcon);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        findAction = new FindAction(findIcon);
+        findAndReplaceAction = new FindAndReplaceAction(findReplaceIcon);
+        selectAllAction = new SelectAllAction(selectAllIcon);
+        dateAndTimeAction = new DateAndTimeAction(dateTimeIcon);
 
 
         /************************* Anonymous UndoableEditListener *************************/
