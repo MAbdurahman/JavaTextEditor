@@ -200,6 +200,66 @@ public class JavaTextEditor extends JFrame {
 
 
 
+        /************************* Anonymous UndoableEditListener *************************/
+        TEXTPANE.getStyledDocument().addUndoableEditListener(new UndoableEditListener() {
+            /**
+             * undoableEditHappened Method -
+             * @param ue - the UndoableEditEvent
+             */
+            @Override
+            public void undoableEditHappened(UndoableEditEvent ue) {
+                undoManager.addEdit(ue.getEdit());
+                undoAction.updateUndoAction();
+                redoAction.updateRedoAction();
+                selectAllAction.updateSelectAllAction();
+
+            }//end of the undoableEditHappened Method
+        });//end of the Anonymous UndoableEditListener Class
+
+        /************************* Anonymous DocumentListener *************************/
+        TEXTPANE.getStyledDocument().addDocumentListener(new DocumentListener() {
+            /**
+             * changedUpdate Method -
+             * @param de - the DocumentEvent
+             */
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                TEXTPANE.getDocument().getLength();
+                hasChanged = true;
+
+            }//end of the changedUpdate Method
+            /**
+             * removeUpdate Method -
+             * @param de - the DocumentEvent
+             */
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                hasChanged = true;
+
+            }//end of the removeUpdate Method
+            /**
+             * insertUpdate Method -
+             * @param de - the DocumentEvent
+             */
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                hasChanged = true;
+
+            }//end of the insertUpdate Method
+        });//end of the Anonymous DocumentListener
+
+        /************************* Anonymous CaretListener *************************/
+        TEXTPANE.addCaretListener(new CaretListener() {
+            /**
+             * caretUpdate Method -
+             * @param ce - the CaretEvent
+             */
+            @Override
+            public void caretUpdate(CaretEvent ce) {
+                TEXTPANE.getCaretPosition();
+
+            }//end of the caretUpdate Method
+        });//end of the Anonymous Caret Listener
 
 
     }//end of initComponents Method
