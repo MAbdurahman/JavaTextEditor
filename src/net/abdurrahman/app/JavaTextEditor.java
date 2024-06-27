@@ -356,7 +356,7 @@ public class JavaTextEditor extends JFrame {
         printPageAction  = new PrintPageAction(printIcon);
         printPageItem = new JMenuItem(printPageAction);
 
-        printPreviewAction = new PrintPreviewAction(printIcon);
+        printPreviewAction = new PrintPreviewAction(printPreviewIcon);
         printPreviewItem = new JMenuItem(printPreviewAction);
 
         exitAction  = new ExitAction(exitIcon);
@@ -380,7 +380,7 @@ public class JavaTextEditor extends JFrame {
         saveFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         saveAsFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
         printPageItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, InputEvent.CTRL_MASK | InputEvent.ALT_DOWN_MASK));
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0, InputEvent.CTRL_MASK | InputEvent.ALT_DOWN_MASK));
 
         /************************* fileMenu and add its menuItems *************************/
         fileMenu.add(newFileItem);

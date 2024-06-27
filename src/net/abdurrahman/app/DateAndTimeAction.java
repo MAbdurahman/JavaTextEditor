@@ -20,15 +20,9 @@ public class DateAndTimeAction extends AbstractAction {
     public void actionPerformed(ActionEvent ae) {
         try {
             String dateAndTime = getFormattedDate();
-          /*  int position = JavaTextEditor.TEXTPANE.getCaretPosition();
-            JTextPane textPane = JavaTextEditor.TEXTPANE;
-            Caret caret = JavaTextEditor.TEXTPANE.getCaret();
-            caret.moveDot(position);
-            int caretPosition = JavaTextEditor.TEXTPANE.getCaretPosition();
-            JavaTextEditor.TEXTPANE.setCaretPosition(caretPosition); */
             int caretPosition = JavaTextEditor.TEXTPANE.getCaretPosition();
             JavaTextEditor.TEXTPANE.getDocument().insertString(caretPosition, dateAndTime, null);
-            /*JavaTextEditor.TEXTPANE.setText(dateAndTime);*/
+
 
         } catch (Exception ex) {
             String message = ex.getMessage();
