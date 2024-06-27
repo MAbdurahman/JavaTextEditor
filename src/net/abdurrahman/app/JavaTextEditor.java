@@ -109,6 +109,12 @@ public class JavaTextEditor extends JFrame {
     protected PrintPreviewAction printPreviewAction;
     protected ExitAction exitAction;
 
+    /** ViewMenu and its menuItems Abstract Actions */
+    LineNumbersAction lineNumbersAction;
+    StatusBarAction statusBarAction;
+    WordWrapAction wordWrapAction;
+
+
 
     /**
      * JavaTextEditor Default Constructor
@@ -376,8 +382,6 @@ public class JavaTextEditor extends JFrame {
         printPageItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, InputEvent.CTRL_MASK | InputEvent.ALT_DOWN_MASK));
 
-
-
         /************************* fileMenu and add its menuItems *************************/
         fileMenu.add(newFileItem);
         fileMenu.add(newWindowItem);
@@ -443,9 +447,14 @@ public class JavaTextEditor extends JFrame {
         editMenu.add(dateTimeItem);
 
         /************* Create the CheckboxMenuItems for the viewMenu **************/
-        lineNumberCheckboxItem = new JCheckBoxMenuItem("Line Numbers", lineNumberIcon);
-        statusBarCheckboxItem = new JCheckBoxMenuItem("Status Bar", statusBarIcon);
-        wordWrapCheckboxItem = new JCheckBoxMenuItem("Word Wrap", wordWrapIcon);
+        lineNumbersAction = new LineNumbersAction(lineNumberIcon);
+        lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
+
+        statusBarAction = new StatusBarAction(statusBarIcon);
+        statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
+
+        wordWrapAction = new WordWrapAction(wordWrapIcon);
+        wordWrapCheckboxItem = new JCheckBoxMenuItem(wordWrapAction);
 
         lineNumberCheckboxItem.setFont(menuItemFont);
         statusBarCheckboxItem.setFont(menuItemFont);
