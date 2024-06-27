@@ -3,6 +3,12 @@ package net.abdurrahman.app;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * WordWrapAction Class
+ * @author MAbdurrahman
+ * @date 26 June 2024
+ * @version 1.0.0
+ */
 public class WordWrapAction extends AbstractAction {
 
     /**

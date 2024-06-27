@@ -489,7 +489,6 @@ public class JavaTextEditor extends JFrame {
         formatMenu.addSeparator();
         formatMenu.add(colorMenu);
 
-
         fontItem = new JMenuItem(new JavaTextEditorFontChooserAction());
         boldItem = new JMenuItem(new StyledEditorKit.BoldAction());
         italicItem = new JMenuItem(new StyledEditorKit.ItalicAction());
@@ -527,9 +526,9 @@ public class JavaTextEditor extends JFrame {
         boldItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
         italicItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
         underlineItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
-        subscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.CTRL_MASK));
-        superscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.CTRL_MASK));
-        strikeThroughItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, InputEvent.CTRL_MASK));
+        subscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        superscriptItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+        strikeThroughItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_9, InputEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
 
         fontMenu.add(fontItem);
         fontMenu.addSeparator();

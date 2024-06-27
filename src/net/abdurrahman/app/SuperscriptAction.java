@@ -9,6 +9,9 @@ import javax.swing.text.StyledEditorKit;
 
 /**
  * SuperscriptAction Class
+ * @author MAbdurrahman
+ * @date 26 June 2024
+ * @version 1.0.0
  */
 public class SuperscriptAction extends StyledEditorKit.StyledTextAction {
     /**
@@ -28,7 +31,7 @@ public class SuperscriptAction extends StyledEditorKit.StyledTextAction {
         if (textPaneEditor != null) {
             StyledEditorKit editorKit = getStyledEditorKit(textPaneEditor);
             MutableAttributeSet mutableAttributes = editorKit.getInputAttributes();
-            boolean isSuperscripted = (StyleConstants.isSuperscript(mutableAttributes)) ? false : true;
+            boolean isSuperscripted = !StyleConstants.isSuperscript(mutableAttributes);
             SimpleAttributeSet simpleAttributes = new SimpleAttributeSet();
             StyleConstants.setSuperscript(simpleAttributes, isSuperscripted);
             setCharacterAttributes(textPaneEditor, simpleAttributes, false);

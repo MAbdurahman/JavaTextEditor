@@ -31,7 +31,7 @@ public class StrikeThroughAction extends StyledEditorKit.StyledTextAction {
         if (textPaneEditor != null) {
             StyledEditorKit editorKit = getStyledEditorKit(textPaneEditor);
             MutableAttributeSet mutableAttributes = editorKit.getInputAttributes();
-            boolean isStrikeThroughed = (StyleConstants.isStrikeThrough(mutableAttributes)) ? false : true;
+            boolean isStrikeThroughed = !StyleConstants.isStrikeThrough(mutableAttributes);
             SimpleAttributeSet simpleAttributes = new SimpleAttributeSet();
             StyleConstants.setStrikeThrough(simpleAttributes, isStrikeThroughed);
             setCharacterAttributes(textPaneEditor, simpleAttributes, false);

@@ -31,7 +31,7 @@ public class SubscriptAction extends StyledEditorKit.StyledTextAction {
         if (textPaneEditor != null) {
             StyledEditorKit editorKit = getStyledEditorKit(textPaneEditor);
             MutableAttributeSet mutableAttributes = editorKit.getInputAttributes();
-            boolean isSubscripted = (StyleConstants.isSubscript(mutableAttributes)) ? false : true;
+            boolean isSubscripted = !StyleConstants.isSubscript(mutableAttributes);
             SimpleAttributeSet simpleAttributes = new SimpleAttributeSet();
             StyleConstants.setSubscript(simpleAttributes, isSubscripted);
             setCharacterAttributes(textPaneEditor, simpleAttributes, false);
