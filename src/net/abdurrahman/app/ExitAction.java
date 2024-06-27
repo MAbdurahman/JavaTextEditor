@@ -15,6 +15,8 @@ public class ExitAction extends AbstractAction {
 
     }//end of the ExitAction Constructor
 
-    public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
+    public void actionPerformed(ActionEvent ae) {
+        System.exit(0);
+    }//end of actionPerformed Method
 
 }//end of ExitAction Class

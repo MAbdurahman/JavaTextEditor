@@ -3,19 +3,17 @@ package net.abdurrahman.app;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class SaveAsFileAction extends AbstractAction {
-
+public class NewWindowAction extends AbstractAction {
     /**
-     * SaveAsFileAction Constructor -
+     * NewWindowAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public SaveAsFileAction(ImageIcon icon) {
-        super("SaveAs...", icon);
+    public NewWindowAction(ImageIcon icon) {
+        super("New Window", icon);
         setEnabled(true);
 
-    }//end of the SaveAsFileAction Constructor
-
+    }//end of the NewWindowAction Constructor
 
     /**
      * actionPerformed Method -
@@ -23,4 +21,4 @@ public class SaveAsFileAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
-}//end of SaveAsFileAction Class
+}//end of NewWindowAction Class

@@ -41,8 +41,8 @@ public class JavaTextEditor extends JFrame {
     private JMenu formatMenu, helpMenu;
 
     /** MenuItems for the fileMenu */
-    private static JMenuItem newItem, openItem, saveItem, saveAsItem;
-    private JMenuItem pageSetupItem, printItem, previewPrintItem;
+    private static JMenuItem newFileItem, newWindowItem, openFileItem, saveFileItem, saveAsFileItem;
+    private JMenuItem pageSetupItem, printPageItem, printPreviewItem;
     private JMenuItem exitItem;
     private JMenu printerMenu;
 
@@ -93,6 +93,21 @@ public class JavaTextEditor extends JFrame {
     /** FindAction, FindAndReplaceAction */
     protected FindAction findAction;
     protected FindAndReplaceAction findAndReplaceAction;
+
+    /** NewFileAction, NewWindowAction, OpenFileAction */
+    protected NewFileAction newFileAction;
+    protected NewWindowAction newWindowAction;
+    protected OpenFileAction openFileAction;
+
+    /** SaveFileAction and SaveAsFileAction */
+    protected SaveFileAction saveFileAction;
+    protected SaveAsFileAction saveAsFileAction;
+
+    /** PageSetupAction, PrintPageAction, PrintPreviewAction */
+    protected PageSetupAction pageSetupAction;
+    protected PrintPageAction printPageAction;
+    protected PrintPreviewAction printPreviewAction;
+    protected ExitAction exitAction;
 
 
     /**
@@ -174,6 +189,7 @@ public class JavaTextEditor extends JFrame {
         ImageIcon lineNumberIcon = new ImageIcon(getClass().getResource("../img/lineNumber.png"));
         ImageIcon moreColorsIcon = new ImageIcon(getClass().getResource("../img/moreColors.png"));
         ImageIcon newFileIcon = new ImageIcon(getClass().getResource("../img/newFile.png"));
+        ImageIcon newWindowIcon = new ImageIcon(getClass().getResource("../img/newWindow.png"));
         ImageIcon openFileIcon = new ImageIcon(getClass().getResource("../img/openFile.png"));
         ImageIcon pageSetupIcon = new ImageIcon(getClass().getResource("../img/pageSetup.png"));
         ImageIcon pasteIcon = new ImageIcon(getClass().getResource("../img/paste.png"));
@@ -182,7 +198,6 @@ public class JavaTextEditor extends JFrame {
         ImageIcon printerIcon = new ImageIcon(getClass().getResource("../img/printer.png"));
         ImageIcon redoIcon = new ImageIcon(getClass().getResource("../img/redo.png"));
         ImageIcon findReplaceIcon = new ImageIcon(getClass().getResource("../img/findReplace.png"));
-        ImageIcon rulerIcon = new ImageIcon(getClass().getResource("../img/ruler.png"));
         ImageIcon saveFileIcon = new ImageIcon(getClass().getResource("../img/save.png"));
         ImageIcon saveAsFileIcon = new ImageIcon(getClass().getResource("../img/saveAs.png"));
         ImageIcon selectAllIcon = new ImageIcon(getClass().getResource("../img/selectAll.png"));
@@ -208,7 +223,7 @@ public class JavaTextEditor extends JFrame {
         hasWordWrap = true;
 
 
-        /** Initialization of UndoManager, undoAction, and redoAction */
+        /** Initialization of UndoManager, undoAction, redoAction, and other editMenuItems */
         undoManager = new UndoManager();
         undoAction = new UndoAction(undoIcon);
         redoAction = new RedoAction(redoIcon);
@@ -314,48 +329,69 @@ public class JavaTextEditor extends JFrame {
         printerMenu = new JMenu("Printer...");
         printerMenu.setIcon(printerIcon);
 
-        newItem = new JMenuItem("New", newFileIcon);
-        openItem = new JMenuItem("Open", openFileIcon);
-        saveItem = new JMenuItem("Save", saveFileIcon);
-        saveAsItem = new JMenuItem("SaveAs...", saveAsFileIcon);
-        pageSetupItem = new JMenuItem("Page Setup", pageSetupIcon);
-        printItem = new JMenuItem("Print", printIcon);
-        previewPrintItem = new JMenuItem("Print Preview", printPreviewIcon);
-        exitItem = new JMenuItem("Exit", exitIcon);
+        newFileAction = new NewFileAction(newFileIcon);
+        newFileItem = new JMenuItem(newFileAction);
+
+        newWindowAction = new NewWindowAction(newWindowIcon);
+        newWindowItem = new JMenuItem(newWindowAction);
+
+        openFileAction = new OpenFileAction(openFileIcon);
+        openFileItem = new JMenuItem(openFileAction);
+
+        saveFileAction = new SaveFileAction(saveFileIcon);
+        saveFileItem = new JMenuItem(saveFileAction);
+
+        saveAsFileAction = new SaveAsFileAction(saveAsFileIcon);
+        saveAsFileItem = new JMenuItem(saveAsFileAction);
+
+        pageSetupAction  = new PageSetupAction(pageSetupIcon);
+        pageSetupItem = new JMenuItem(pageSetupAction);
+
+        printPageAction  = new PrintPageAction(printIcon);
+        printPageItem = new JMenuItem(printPageAction);
+
+        printPreviewAction = new PrintPreviewAction(printIcon);
+        printPreviewItem = new JMenuItem(printPreviewAction);
+
+        exitAction  = new ExitAction(exitIcon);
+        exitItem = new JMenuItem(exitAction);
 
         printerMenu.setFont(menuItemFont);
-        newItem.setFont(menuItemFont);
-        openItem.setFont(menuItemFont);
-        saveItem.setFont(menuItemFont);
-        saveAsItem.setFont(menuItemFont);
+        newFileItem.setFont(menuItemFont);
+        newWindowItem.setFont(menuItemFont);
+        openFileItem.setFont(menuItemFont);
+        saveFileItem.setFont(menuItemFont);
+        saveAsFileItem.setFont(menuItemFont);
         pageSetupItem.setFont(menuItemFont);
-        printItem.setFont(menuItemFont);
-        previewPrintItem.setFont(menuItemFont);
+        printPageItem.setFont(menuItemFont);
+        printPreviewItem.setFont(menuItemFont);
         exitItem.setFont(menuItemFont);
 
         /** Shortcut KeyStrokes for JMenuItems for the fileMenu */
-        newItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-        openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-        saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-        saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
-        printItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+        newFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+        /*newWindowItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));*/
+        openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        saveFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+        saveAsFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
+        printPageItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, InputEvent.CTRL_MASK | InputEvent.ALT_DOWN_MASK));
 
 
 
         /************************* fileMenu and add its menuItems *************************/
-        fileMenu.add(newItem);
-        fileMenu.add(openItem);
+        fileMenu.add(newFileItem);
+        fileMenu.add(newWindowItem);
+        fileMenu.add(openFileItem);
         fileMenu.addSeparator();
-        fileMenu.add(saveItem);
-        fileMenu.add(saveAsItem);
+        fileMenu.add(saveFileItem);
+        fileMenu.add(saveAsFileItem);
         fileMenu.addSeparator();
         fileMenu.add(pageSetupItem);
         fileMenu.add(printerMenu);
         fileMenu.addSeparator();
-        printerMenu.add(printItem);
+        printerMenu.add(printPageItem);
         printerMenu.addSeparator();
-        printerMenu.add(previewPrintItem);
+        printerMenu.add(printPreviewItem);
         fileMenu.add(exitItem);
 
         /************************* editMenu and add its menuItems *************************/
@@ -713,7 +749,7 @@ public class JavaTextEditor extends JFrame {
             text.append("cut, copy, and paste, users are allowed to find and replace desired\n");
             text.append("specified text. \n\n");
             text.append("@author:  Mahdi Abdurrahman\n");
-            text.append("@date:  15 June 2024\n");
+            text.append("@date:  25 June 2024\n");
             text.append("@version:  1.0.0");
 
             aboutTextArea = new JTextArea(30, 1);
