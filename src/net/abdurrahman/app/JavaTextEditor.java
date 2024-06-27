@@ -597,11 +597,10 @@ public class JavaTextEditor extends JFrame {
         colorMenu.add(moreColorsItem);
 
         /************************* helpMenu and its menuItems *************************/
-        //Create the MenuItem for the helpMenu
+        /**Create the MenuItem for the helpMenu*/
         helpItem = new JMenuItem("View Help", helpIcon);
         aboutItem = new JMenuItem("About Editor", aboutIcon);
 
-        //helpMenu.add(new AboutDialogAction(this, "About", true));
         helpItem.setFont(menuItemFont);
         aboutItem.setFont(menuItemFont);
 
@@ -615,9 +614,7 @@ public class JavaTextEditor extends JFrame {
         helpMenu.addSeparator();
         helpMenu.add(aboutItem);
 
-
     }//end of initComponents Method
-
 
     /**
      * getTextPane Method -

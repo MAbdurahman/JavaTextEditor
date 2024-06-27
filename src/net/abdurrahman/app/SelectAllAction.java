@@ -30,7 +30,7 @@ public class SelectAllAction extends AbstractAction {
     public void actionPerformed(ActionEvent ae) {
         try {
             TEXTPANE.selectAll();
-            if (!TEXTPANE.getSelectedText().isEmpty()) {
+            if (TEXTPANE.getSelectedText().length() > 0) {
                 JavaTextEditor.cutItem.setEnabled(true);
                 JavaTextEditor.copyItem.setEnabled(true);
                 JavaTextEditor.deleteItem.setEnabled(true);
@@ -62,7 +62,7 @@ public class SelectAllAction extends AbstractAction {
      * updateSelectAllAction Method -
      */
     protected void updateSelectAllAction() {
-        if (TEXTPANE.getText().isEmpty() || !TEXTPANE.getSelectedText().isEmpty()) {
+        if (TEXTPANE.getText().isEmpty() || TEXTPANE.getSelectedText().length() > 0) {
             setEnabled(false);
             putValue(Action.NAME, "SelectAll");
 
