@@ -20,5 +20,7 @@ public class NewWindowAction extends AbstractAction {
      * @param ae the event to be processed
      */
     @Override
-    public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
+    public void actionPerformed(ActionEvent ae) {
+
+    }//end of actionPerformed Method
 }//end of NewWindowAction Class

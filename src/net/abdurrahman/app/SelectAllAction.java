@@ -19,7 +19,7 @@ public class SelectAllAction extends AbstractAction {
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public SelectAllAction(ImageIcon icon) {
         super("SelectAll", icon);
-        setEnabled(!TEXTPANE.getText().equals(""));
+        setEnabled(!TEXTPANE.getText().isEmpty());
 
     }//end of the SelectionAllAction Constructor
     /**
@@ -30,28 +30,30 @@ public class SelectAllAction extends AbstractAction {
     public void actionPerformed(ActionEvent ae) {
         try {
             TEXTPANE.selectAll();
-            if (TEXTPANE.getSelectedText().length() > 0) {
-                JavaTextEditor.cutItem.setEnabled(true);
-                JavaTextEditor.copyItem.setEnabled(true);
-                JavaTextEditor.deleteItem.setEnabled(true);
-                JavaTextEditor.selectAllItem.setEnabled(false);
+            if (!TEXTPANE.getText().isEmpty()) {
+                JavaTextEditor.selectAllItem.setEnabled(true);
                 putValue(Action.NAME, "Select All");
 
             } else {
-                JavaTextEditor.cutItem.setEnabled(false);
-                JavaTextEditor.copyItem.setEnabled(false);
-                JavaTextEditor.deleteItem.setEnabled(false);
-                JavaTextEditor.selectAllItem.setEnabled(true);
+                JavaTextEditor.selectAllItem.setEnabled(false);
                 putValue(Action.NAME, "Select All");
+            }
+            if (!TEXTPANE.getSelectedText().isEmpty()) {
+                JavaTextEditor.cutItem.setEnabled(true);
+                JavaTextEditor.copyItem.setEnabled(true);
+                JavaTextEditor.deleteItem.setEnabled(true);
+                JavaTextEditor.selectAllItem.setEnabled(true);
             }
 
         } catch (Exception ex) {
             String message = "";
             if (ex instanceof NullPointerException) {
                 message = "Error: NullPointerException";
-            } else {
+            } else if (ex instanceof IllegalArgumentException) {
                 message = "Error: IllegalArgumentException";
 
+            } else {
+                message = "Error: " + ex.getMessage();
             }
             JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -62,14 +64,21 @@ public class SelectAllAction extends AbstractAction {
      * updateSelectAllAction Method -
      */
     protected void updateSelectAllAction() {
-        if (TEXTPANE.getText().isEmpty() || TEXTPANE.getSelectedText().length() > 0) {
+        /*if (TEXTPANE.getText() == null || TEXTPANE.getSelectedText() ==  null) {
             setEnabled(false);
             putValue(Action.NAME, "SelectAll");
 
         } else {
             setEnabled(true);
             putValue(Action.NAME, "SelectAll");
-        }
+        }*/
+
+
+        /*putValue(Action.NAME, "SelectAll");*/
+        /*putValue(Action.NAME, "Select All");*/
+        setEnabled((!TEXTPANE.getText().isEmpty()) && ((TEXTPANE.getCaretPosition() != 0))
+                && ((TEXTPANE.getSelectionEnd() - TEXTPANE.getSelectionStart()) <= 0));
+        putValue(Action.NAME, "Select All");
 
     }//end of the updateSelectAllAction Method
 }//end of the SelectAllAction Class
