@@ -2,6 +2,7 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.StyledEditorKit;

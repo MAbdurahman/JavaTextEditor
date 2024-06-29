@@ -2,6 +2,8 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 /**
  * PrintPageAction Class
@@ -10,6 +12,8 @@ import java.awt.event.ActionEvent;
  * @version 1.0.0
  */
 public class PrintPageAction extends AbstractAction {
+    //Instance variables
+    PrinterJob printerJob = PrinterJob.getPrinterJob();
 
     /**
      * PrintPageAction Constructor -
@@ -27,5 +31,16 @@ public class PrintPageAction extends AbstractAction {
      * @param ae the event to be processed
      */
     @Override
-    public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
+    public void actionPerformed(ActionEvent ae) {
+        printerJob = PrinterJob.getPrinterJob();
+        if (printerJob.printDialog()) {
+            try {
+                printerJob.print();
+
+            } catch (PrinterException ex) {
+                String message = ex.getMessage();
+                JOptionPane.showMessageDialog(JavaTextEditor.TEXTPANE, message);
+            }
+        }
+    }//end of actionPerformed Method
 }//end of PrintPageAction Class

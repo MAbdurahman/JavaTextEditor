@@ -3,6 +3,7 @@ package net.abdurrahman.app;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import static net.abdurrahman.app.JavaTextEditor.TEXTPANE;
+import static net.abdurrahman.app.JavaTextEditor.selectAllItem;
 
 /**
  * SelectAllAction Class
@@ -73,12 +74,17 @@ public class SelectAllAction extends AbstractAction {
             putValue(Action.NAME, "SelectAll");
         }*/
 
-
-        /*putValue(Action.NAME, "SelectAll");*/
-        /*putValue(Action.NAME, "Select All");*/
-        setEnabled((!TEXTPANE.getText().isEmpty()) && ((TEXTPANE.getCaretPosition() != 0))
+        if (!TEXTPANE.getText().isEmpty()) {
+            setEnabled(!TEXTPANE.getText().isEmpty());
+            putValue(Action.NAME, "Select All");
+        }
+        if ((TEXTPANE.getSelectionEnd() - TEXTPANE.getSelectionStart()) > 0) {
+            selectAllItem.setEnabled(false);
+            putValue(Action.NAME, "Select All");
+        }
+        /*setEnabled((!TEXTPANE.getText().isEmpty()) && ((TEXTPANE.getCaretPosition() != 0))
                 && ((TEXTPANE.getSelectionEnd() - TEXTPANE.getSelectionStart()) <= 0));
-        putValue(Action.NAME, "Select All");
+        putValue(Action.NAME, "Select All");*/
 
     }//end of the updateSelectAllAction Method
 }//end of the SelectAllAction Class

@@ -44,7 +44,8 @@ public class CutAction extends AbstractAction {
      * updateCutAction Method -
      */
     public void updateCutAction() {
-        setEnabled(JavaTextEditor.TEXTPANE.getSelectedText() != null);
+        /*setEnabled(JavaTextEditor.TEXTPANE.getSelectedText() != null);*/
+        setEnabled(JavaTextEditor.TEXTPANE.getSelectionEnd() - JavaTextEditor.TEXTPANE.getSelectionStart() > 0);
         putValue(Action.NAME, "Cut");
 
     }//end of updateCutAction Method

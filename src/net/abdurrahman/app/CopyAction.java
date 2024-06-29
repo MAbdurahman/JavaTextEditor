@@ -43,7 +43,8 @@ public class CopyAction extends AbstractAction {
      * updateCopyAction Method -
      */
     public void updateCopyAction() {
-        setEnabled(JavaTextEditor.TEXTPANE.getSelectedText() != null);
+        /*setEnabled(JavaTextEditor.TEXTPANE.getSelectedText() != null);*/
+        setEnabled(JavaTextEditor.TEXTPANE.getSelectionEnd() - JavaTextEditor.TEXTPANE.getSelectionStart() > 0);
         putValue(Action.NAME, "Copy");
 
     }//end of updateCopyAction Method

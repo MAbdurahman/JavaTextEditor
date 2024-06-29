@@ -50,7 +50,7 @@ public class PasteAction extends AbstractAction {
 
         } catch (Exception ex) {
             String message = ex.getMessage();
-            JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(textEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
         }
         updatePasteAction();
 
@@ -58,9 +58,9 @@ public class PasteAction extends AbstractAction {
 
     public String updatePasteAction() {
         try {
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
+              return (String) clipboard.getData(DataFlavor.stringFlavor);
 
-        } catch (HeadlessException e) {
+        } catch (HeadlessException | IOException e) {
             String message = e.getMessage();
             JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -70,13 +70,9 @@ public class PasteAction extends AbstractAction {
             JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
             /*e.printStackTrace();*/
 
-        } catch (IOException e) {
-            String message = e.getMessage();
-            JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-
         }
         return null;
+
     }//end of updatePasteAction Method
 
 }//end of PasteAction Class
