@@ -260,6 +260,11 @@ public class JavaTextEditor extends JFrame {
                 undoAction.updateUndoAction();
                 redoAction.updateRedoAction();
                 selectAllAction.updateSelectAllAction();
+                copyAction.updateCopyAction();
+                cutAction.updateCutAction();
+                deleteAction.updateDeleteAction();
+                findAction.updateFindAction();
+                findAndReplaceAction.updateFindAndReplaceAction();
 
             }//end of the undoableEditHappened Method
         });//end of the Anonymous UndoableEditListener Class

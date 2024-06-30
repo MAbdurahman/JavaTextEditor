@@ -450,7 +450,7 @@ public class FindAndReplace extends JDialog implements ActionListener {
 
                     } else {
                         isEndOfSearch = true;
-                        String message = "TextPad has completed the search for \"" + wordToFind + "\".";
+                        String message = "JavaTextEditor has completed the search for \"" + wordToFind + "\".";
                         JOptionPane.showMessageDialog(rootPane, message);
                     }
                 }
@@ -500,8 +500,8 @@ public class FindAndReplace extends JDialog implements ActionListener {
                     start = text.indexOf(wordToFind, wordPosition);
                     System.out.println("start is " +start);
 
+                    isEndOfSearch = true;
                     if (start != - 1) {
-                        isEndOfSearch = true;
 
                         wordPosition = (start + wordToFind.length());
                         System.out.println("wordPosition is "+wordPosition);
@@ -521,9 +521,8 @@ public class FindAndReplace extends JDialog implements ActionListener {
                         }
 
                     } else {
-                        isEndOfSearch = true;
                         replacing = false;
-                        String message = "TextPad has completed replacing text for \"" + wordToFind + "\".";
+                        String message = "JavaTextEditor has completed replacing text for \"" + wordToFind + "\".";
                         JOptionPane.showMessageDialog(rootPane, message);
                     }
                 }
