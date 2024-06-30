@@ -280,7 +280,7 @@ public class JavaTextEditor extends JFrame {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
                 hasChanged = true;
-                JavaTextEditor.selectAllAction.updateSelectAllAction();
+
 
             }//end of the changedUpdate Method
             /**
@@ -292,7 +292,7 @@ public class JavaTextEditor extends JFrame {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
                 hasChanged = true;
-                JavaTextEditor.selectAllAction.updateSelectAllAction();
+
 
             }//end of the removeUpdate Method
             /**
@@ -304,7 +304,7 @@ public class JavaTextEditor extends JFrame {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
                 hasChanged = true;
-                JavaTextEditor.selectAllAction.updateSelectAllAction();
+
 
             }//end of the insertUpdate Method
         });//end of the Anonymous DocumentListener
