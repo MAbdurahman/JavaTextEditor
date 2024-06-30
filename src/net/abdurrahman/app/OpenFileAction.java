@@ -2,6 +2,7 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,13 +11,15 @@ import java.io.IOException;
 
 /**
  * OpenFileAction Class
+ *
  * @author MAbdurrahman
- * @date 26 June 2024
  * @version 1.0.0
+ * @date 26 June 2024
  */
 public class OpenFileAction extends AbstractAction {
     /**
      * OpenFileAction Constructor -
+     *
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -28,14 +31,20 @@ public class OpenFileAction extends AbstractAction {
 
     /**
      * actionPerformed Method -
+     *
      * @param ae the event to be processed
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
         JFileChooser jFileChooser = new JFileChooser();
+        Image icon = Toolkit.getDefaultToolkit().getImage(JavaTextEditor.class.getResource("../img/java-texteditor.png"));
+        jFileChooser.setDialogTitle("Open File");
+
+
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter fileNameExtensionFilter =
-                new FileNameExtensionFilter("Text File", "txt");
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Text Files",
+                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         int checkInput = jFileChooser.showOpenDialog(null);
