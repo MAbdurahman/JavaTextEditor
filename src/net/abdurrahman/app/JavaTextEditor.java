@@ -216,7 +216,7 @@ public class JavaTextEditor extends JFrame {
         ImageIcon undoIcon = new ImageIcon(getClass().getResource("../img/undo.png"));
         ImageIcon wordWrapIcon = new ImageIcon(getClass().getResource("../img/wordWrap.png"));
 
-        /************************* JTextpane and attributes *************************/
+        /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
         TEXTPANE.setFont(new Font("Verdana", Font.PLAIN, 14));
         this.add(TEXTPANE);

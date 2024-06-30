@@ -48,9 +48,9 @@ import javax.swing.text.Position;
 /**
  * JavaTextEditorFontChooser Class
  *
- * @author: MAbdurrahman
- * @date: 15 June 2024
- * @version: 1.0.0.
+ * @author MAbdurrahman
+ * @date 15 June 2024
+ * @version 1.0.0.
  */
 public class JavaTextEditorFontChooser extends JComponent {
     /** Instance Variables */
@@ -58,11 +58,11 @@ public class JavaTextEditorFontChooser extends JComponent {
     public static final int CANCEL_OPTION = 1;
     public static final int ERROR_OPTION = -1;
 
-    private static Font DEFAULT_FONT = new Font("Verdana", Font.PLAIN, 12);
-    private static int[] FONT_STYLES = {Font.PLAIN, Font.BOLD, Font.ITALIC,
+    private static final Font DEFAULT_FONT = new Font("Verdana", Font.PLAIN, 14);
+    private static final int[] FONT_STYLES = {Font.PLAIN, Font.BOLD, Font.ITALIC,
             Font.BOLD | Font.ITALIC};
     protected int dialogResultValue = ERROR_OPTION;
-    private static String[] FONT_SIZES = {"7", "8", "9", "10", "11", "12", "14", "15",
+    private static final String[] FONT_SIZES = {"7", "8", "9", "10", "11", "12", "14", "15",
             "16", "17", "18", "19", "20", "22", "24",
             "26", "28", "30", "32", "34", "36", "38",
             "40", "42", "44", "46", "48", "50", "52",

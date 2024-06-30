@@ -30,7 +30,7 @@ public class JavaTextEditorFontChooserAction extends StyledEditorKit.StyledTextA
         JTextPane textPaneEditor = (JTextPane) getEditor(ae);
         if (textPaneEditor == null) {
             String message = "Select the TextPad before changing the font.";
-            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR);
+            JOptionPane.showMessageDialog(null, message, "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         fontChooser = new JavaTextEditorFontChooser();
@@ -43,9 +43,9 @@ public class JavaTextEditorFontChooserAction extends StyledEditorKit.StyledTextA
 
             StyleConstants.setFontFamily(mutableAttributes, font.getFamily());
             StyleConstants.setFontSize(mutableAttributes, font.getSize());
-            boolean isSubscripted = (StyleConstants.isSubscript(mutableAttributes)) ? false : true;
-            boolean isSuperscripted = (StyleConstants.isSuperscript(mutableAttributes)) ? false : true;
-            boolean isStrikeThroughed = (StyleConstants.isStrikeThrough(mutableAttributes)) ? false : true;
+            boolean isSubscripted = !StyleConstants.isSubscript(mutableAttributes);
+            boolean isSuperscripted = !StyleConstants.isSuperscript(mutableAttributes);
+            boolean isStrikeThroughed = !StyleConstants.isStrikeThrough(mutableAttributes);
 
             SimpleAttributeSet simpleAttributes = new SimpleAttributeSet();
             StyleConstants.setSubscript(simpleAttributes, isSubscripted);
