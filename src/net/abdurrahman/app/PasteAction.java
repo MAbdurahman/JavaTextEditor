@@ -33,7 +33,6 @@ public class PasteAction extends AbstractAction {
             }
         }*/
 
-
     }//end of PasteAction Constructor
 
     public void actionPerformed(ActionEvent ae) {
@@ -66,8 +65,9 @@ public class PasteAction extends AbstractAction {
             e.printStackTrace();
 
         } catch (UnsupportedFlavorException e) {
-            String message = e.getMessage();
-            JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            /*String message = e.getMessage();*/
+            String message = "Unsupported String to paste is null!";
+            JOptionPane.showMessageDialog(textEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
             /*e.printStackTrace();*/
 
         }

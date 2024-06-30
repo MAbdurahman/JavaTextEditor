@@ -83,17 +83,17 @@ public class JavaTextEditor extends JFrame {
     protected RedoAction redoAction;
 
     /** CopyAction, CutAction, PasteAction */
-    protected CutAction cutAction;
-    protected CopyAction copyAction;
+    protected static CutAction cutAction;
+    protected static CopyAction copyAction;
     protected PasteAction pasteAction;
 
     /** DateAndTimeAction, DeleteAction, SelectAllAction */
-    protected SelectAllAction selectAllAction;
+    protected static SelectAllAction selectAllAction;
     protected DateAndTimeAction dateAndTimeAction;
-    protected DeleteAction deleteAction;
+    protected static DeleteAction deleteAction;
     /** FindAction, FindAndReplaceAction */
-    protected FindAction findAction;
-    protected FindAndReplaceAction findAndReplaceAction;
+    protected static FindAction findAction;
+    protected static FindAndReplaceAction findAndReplaceAction;
 
     /** NewFileAction, NewWindowAction, OpenFileAction */
     protected NewFileAction newFileAction;
@@ -277,8 +277,10 @@ public class JavaTextEditor extends JFrame {
              */
             @Override
             public void changedUpdate(DocumentEvent de) {
+                de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
                 hasChanged = true;
+                JavaTextEditor.selectAllAction.updateSelectAllAction();
 
             }//end of the changedUpdate Method
             /**
@@ -287,7 +289,10 @@ public class JavaTextEditor extends JFrame {
              */
             @Override
             public void removeUpdate(DocumentEvent de) {
+                de.getDocument().getLength();
+                TEXTPANE.getDocument().getLength();
                 hasChanged = true;
+                JavaTextEditor.selectAllAction.updateSelectAllAction();
 
             }//end of the removeUpdate Method
             /**
@@ -296,7 +301,10 @@ public class JavaTextEditor extends JFrame {
              */
             @Override
             public void insertUpdate(DocumentEvent de) {
+                de.getDocument().getLength();
+                TEXTPANE.getDocument().getLength();
                 hasChanged = true;
+                JavaTextEditor.selectAllAction.updateSelectAllAction();
 
             }//end of the insertUpdate Method
         });//end of the Anonymous DocumentListener
