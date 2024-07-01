@@ -20,15 +20,19 @@ import static net.abdurrahman.app.JavaTextEditor.TEXTPANE;
  * @date 26 June 2024
  */
 public class OpenFileAction extends AbstractAction {
+
+    //Instance variables
+    JavaTextEditor javaTextEditor;
     /**
      * OpenFileAction Constructor -
      *
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public OpenFileAction(ImageIcon icon) {
+    public OpenFileAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Open", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the OpenFileAction Constructor
 
@@ -56,7 +60,8 @@ public class OpenFileAction extends AbstractAction {
         if (checkInput == JFileChooser.APPROVE_OPTION) {
             File openedFile = jFileChooser.getSelectedFile();
             String openedFileName = openedFile.getName();
-            parent.setTitle(openedFileName);
+            javaTextEditor.setTitle(openedFileName);
+            /*parent.setTitle(openedFileName);*/
             System.out.println(openedFileName);
             try {
                 FileReader fileReader = new FileReader(openedFile);

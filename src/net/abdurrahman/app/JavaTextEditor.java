@@ -355,7 +355,7 @@ public class JavaTextEditor extends JFrame {
         newWindowAction = new NewWindowAction(newWindowIcon);
         newWindowItem = new JMenuItem(newWindowAction);
 
-        openFileAction = new OpenFileAction(openFileIcon);
+        openFileAction = new OpenFileAction(openFileIcon, this);
         openFileItem = new JMenuItem(openFileAction);
 
         saveFileAction = new SaveFileAction(saveFileIcon);
