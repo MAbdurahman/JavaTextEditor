@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static net.abdurrahman.app.JavaTextEditor.TEXTPANE;
+
+
 /**
  * OpenFileAction Class
  *
@@ -36,22 +39,25 @@ public class OpenFileAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
+        /** Assign image to parent and later assign to JFileChooser */
+        JFrame parent = new JFrame();
+        parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+
         JFileChooser jFileChooser = new JFileChooser();
-        Image icon = Toolkit.getDefaultToolkit().getImage(JavaTextEditor.class.getResource("../img/java-texteditor.png"));
         jFileChooser.setDialogTitle("Open File");
-
-
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Text Files",
                 "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        int checkInput = jFileChooser.showOpenDialog(null);
+        int checkInput = jFileChooser.showOpenDialog(parent);
 
         if (checkInput == JFileChooser.APPROVE_OPTION) {
             File openedFile = jFileChooser.getSelectedFile();
-
+            String openedFileName = openedFile.getName();
+            parent.setTitle(openedFileName);
+            System.out.println(openedFileName);
             try {
                 FileReader fileReader = new FileReader(openedFile);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -63,8 +69,10 @@ public class OpenFileAction extends AbstractAction {
                     string2.append(string1).append("\n");
                 }
 
-                JavaTextEditor.TEXTPANE.setText(string2.toString());
+                TEXTPANE.setText(string2.toString());
+
                 bufferedReader.close();
+
 
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
