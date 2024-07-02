@@ -66,7 +66,7 @@ public class PasteAction extends AbstractAction {
 
         } catch (UnsupportedFlavorException e) {
             /*String message = e.getMessage();*/
-            String message = "Unsupported String to paste is null!";
+            String message = "Supported String to paste is null!";
             JOptionPane.showMessageDialog(textEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
             /*e.printStackTrace();*/
 
