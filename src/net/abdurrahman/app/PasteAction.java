@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class PasteAction extends AbstractAction {
 
-    JavaTextEditor textEditor;
+    JavaTextEditor javaTextEditor;
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 
@@ -49,7 +49,7 @@ public class PasteAction extends AbstractAction {
 
         } catch (Exception ex) {
             String message = ex.getMessage();
-            JOptionPane.showMessageDialog(textEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
         }
         updatePasteAction();
 
@@ -61,13 +61,13 @@ public class PasteAction extends AbstractAction {
 
         } catch (HeadlessException | IOException e) {
             String message = e.getMessage();
-            JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
 
         } catch (UnsupportedFlavorException e) {
             /*String message = e.getMessage();*/
             String message = "Supported String to paste is null!";
-            JOptionPane.showMessageDialog(textEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Info", JOptionPane.INFORMATION_MESSAGE);
             /*e.printStackTrace();*/
 
         }
