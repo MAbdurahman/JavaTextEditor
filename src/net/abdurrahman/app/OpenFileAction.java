@@ -4,10 +4,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import static net.abdurrahman.app.JavaTextEditor.TEXTPANE;
 
@@ -51,7 +48,8 @@ public class OpenFileAction extends AbstractAction {
         jFileChooser.setDialogTitle("Open File");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Text Files",
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *rtf, *.txt)";
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
                 "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
@@ -60,7 +58,7 @@ public class OpenFileAction extends AbstractAction {
         if (checkInput == JFileChooser.APPROVE_OPTION) {
             File openedFile = jFileChooser.getSelectedFile();
             String openedFileName = openedFile.getName();
-            javaTextEditor.setTitle(openedFileName);
+            javaTextEditor.setTitle(openedFileName + " - TextEditor");
             /*parent.setTitle(openedFileName);*/
             System.out.println(openedFileName);
             try {
@@ -79,8 +77,10 @@ public class OpenFileAction extends AbstractAction {
                 bufferedReader.close();
 
 
-            } catch (IOException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
+            } catch (IOException ex) {
+                String message = ex.getMessage();
+                JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
         }
     }//end of actionPerformed Method

@@ -232,8 +232,8 @@ public class JavaTextEditor extends JFrame {
 
         /** Initialization of UndoManager, undoAction, redoAction, and other editMenuItems */
         undoManager = new UndoManager();
-        undoAction = new UndoAction(undoIcon);
-        redoAction = new RedoAction(redoIcon);
+        undoAction = new UndoAction(undoIcon, this);
+        redoAction = new RedoAction(redoIcon, this);
         cutAction = new CutAction(cutIcon);
         copyAction = new CopyAction(copyIcon);
         deleteAction = new DeleteAction(deleteIcon);
@@ -266,6 +266,7 @@ public class JavaTextEditor extends JFrame {
                 findAction.updateFindAction();
                 findAndReplaceAction.updateFindAndReplaceAction();
 
+
             }//end of the undoableEditHappened Method
         });//end of the Anonymous UndoableEditListener Class
 
@@ -277,7 +278,9 @@ public class JavaTextEditor extends JFrame {
              */
             @Override
             public void changedUpdate(DocumentEvent de) {
-                de.getDocument().getLength();
+                if (de.getDocument().getLength() == 0) {
+
+                }
                 TEXTPANE.getDocument().getLength();
                 hasChanged = true;
 
@@ -364,7 +367,7 @@ public class JavaTextEditor extends JFrame {
         saveAsFileAction = new SaveAsFileAction(saveAsFileIcon);
         saveAsFileItem = new JMenuItem(saveAsFileAction);
 
-        pageSetupAction  = new PageSetupAction(pageSetupIcon);
+        pageSetupAction  = new PageSetupAction(pageSetupIcon, this);
         pageSetupItem = new JMenuItem(pageSetupAction);
 
         printPageAction  = new PrintPageAction(printIcon);
@@ -644,14 +647,16 @@ public class JavaTextEditor extends JFrame {
      * UndoAction Class
      */
     class UndoAction extends AbstractAction {
+        JavaTextEditor javaTextEditor;
         /**
          * UndoAction Constructor -
          * @param icon - ImageIcon
          */
         @SuppressWarnings("OverridableMethodCallInConstructor")
-        public UndoAction(ImageIcon icon) {
+        public UndoAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
             super("Undo", icon);
             setEnabled(false);
+            this.javaTextEditor = javaTextEditor;
 
         }//end of the UndoAction Constructor
         /**
@@ -662,6 +667,7 @@ public class JavaTextEditor extends JFrame {
         public void actionPerformed(ActionEvent ae) {
             try {
                 undoManager.undo();
+
 
             } catch (CannotUndoException ex) {
                 String message = ex.getMessage();
@@ -692,14 +698,17 @@ public class JavaTextEditor extends JFrame {
      * RedoAction Class -
      */
     class RedoAction extends AbstractAction {
+        //Instance variables
+        JavaTextEditor javaTextEditor;
         /**
          * RedoAction Constructor -
          * @param icon - the ImageIcon
          */
         @SuppressWarnings("OverridableMethodCallInConstructor")
-        public RedoAction(ImageIcon icon) {
+        public RedoAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
             super("Redo", icon);
             setEnabled(false);
+            this.javaTextEditor = javaTextEditor;
 
         }//end of the RedoAction Constructor
         /**
