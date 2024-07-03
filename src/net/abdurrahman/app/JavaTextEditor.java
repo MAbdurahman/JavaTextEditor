@@ -115,8 +115,6 @@ public class JavaTextEditor extends JFrame {
     StatusBarAction statusBarAction;
     WordWrapAction wordWrapAction;
 
-
-
     /**
      * JavaTextEditor Default Constructor
      */
