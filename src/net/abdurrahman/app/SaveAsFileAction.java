@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class SaveAsFileAction extends AbstractAction {
+    //Instance variables
+    JavaTextEditor javaTextEditor;
 
     /**
      * SaveAsFileAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public SaveAsFileAction(ImageIcon icon) {
+    public SaveAsFileAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("SaveAs...", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the SaveAsFileAction Constructor
-
 
     /**
      * actionPerformed Method -

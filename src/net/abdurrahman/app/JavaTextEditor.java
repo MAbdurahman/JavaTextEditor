@@ -238,13 +238,13 @@ public class JavaTextEditor extends JFrame {
         copyAction = new CopyAction(copyIcon);
         deleteAction = new DeleteAction(deleteIcon);
         try {
-            pasteAction = new PasteAction(pasteIcon);
+            pasteAction = new PasteAction(pasteIcon, this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         findAction = new FindAction(findIcon);
         findAndReplaceAction = new FindAndReplaceAction(findReplaceIcon);
-        selectAllAction = new SelectAllAction(selectAllIcon);
+        selectAllAction = new SelectAllAction(selectAllIcon, this);
         dateAndTimeAction = new DateAndTimeAction(dateTimeIcon);
 
 
@@ -352,31 +352,31 @@ public class JavaTextEditor extends JFrame {
         printerMenu = new JMenu("Printer...");
         printerMenu.setIcon(printerIcon);
 
-        newFileAction = new NewFileAction(newFileIcon);
+        newFileAction = new NewFileAction(newFileIcon, this);
         newFileItem = new JMenuItem(newFileAction);
 
-        newWindowAction = new NewWindowAction(newWindowIcon);
+        newWindowAction = new NewWindowAction(newWindowIcon, this);
         newWindowItem = new JMenuItem(newWindowAction);
 
         openFileAction = new OpenFileAction(openFileIcon, this);
         openFileItem = new JMenuItem(openFileAction);
 
-        saveFileAction = new SaveFileAction(saveFileIcon);
+        saveFileAction = new SaveFileAction(saveFileIcon, this);
         saveFileItem = new JMenuItem(saveFileAction);
 
-        saveAsFileAction = new SaveAsFileAction(saveAsFileIcon);
+        saveAsFileAction = new SaveAsFileAction(saveAsFileIcon, this);
         saveAsFileItem = new JMenuItem(saveAsFileAction);
 
         pageSetupAction  = new PageSetupAction(pageSetupIcon, this);
         pageSetupItem = new JMenuItem(pageSetupAction);
 
-        printPageAction  = new PrintPageAction(printIcon);
+        printPageAction  = new PrintPageAction(printIcon, this);
         printPageItem = new JMenuItem(printPageAction);
 
-        printPreviewAction = new PrintPreviewAction(printPreviewIcon);
+        printPreviewAction = new PrintPreviewAction(printPreviewIcon, this);
         printPreviewItem = new JMenuItem(printPreviewAction);
 
-        exitAction  = new ExitAction(exitIcon);
+        exitAction  = new ExitAction(exitIcon, this);
         exitItem = new JMenuItem(exitAction);
 
         printerMenu.setFont(menuItemFont);
@@ -464,10 +464,10 @@ public class JavaTextEditor extends JFrame {
         editMenu.add(dateTimeItem);
 
         /************* Create the CheckboxMenuItems for the viewMenu **************/
-        lineNumbersAction = new LineNumbersAction(lineNumberIcon);
+        lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
         lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
 
-        statusBarAction = new StatusBarAction(statusBarIcon);
+        statusBarAction = new StatusBarAction(statusBarIcon, this);
         statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
 
         wordWrapAction = new WordWrapAction(wordWrapIcon);

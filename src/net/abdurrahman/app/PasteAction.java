@@ -11,12 +11,15 @@ import java.io.IOException;
 public class PasteAction extends AbstractAction {
 
     JavaTextEditor javaTextEditor;
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Clipboard clipboard;
 
 
-    public PasteAction(ImageIcon icon) {
+    public PasteAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Paste", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
+        clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
         /*try {
             String stringData = (String) clipboard.getData(DataFlavor.stringFlavor);
             if (stringData != null) {
@@ -59,10 +62,10 @@ public class PasteAction extends AbstractAction {
         try {
               return (String) clipboard.getData(DataFlavor.stringFlavor);
 
-        } catch (HeadlessException | IOException e) {
-            String message = e.getMessage();
+        } catch (HeadlessException | IOException ex) {
+            String message = ex.getMessage();
             JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            ex.printStackTrace();
 
         } catch (UnsupportedFlavorException e) {
             /*String message = e.getMessage();*/

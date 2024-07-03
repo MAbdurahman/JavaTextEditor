@@ -13,6 +13,7 @@ import java.awt.print.PrinterJob;
  */
 public class PrintPageAction extends AbstractAction {
     //Instance variables
+    JavaTextEditor javaTextEditor;
     PrinterJob printerJob = PrinterJob.getPrinterJob();
 
     /**
@@ -20,9 +21,10 @@ public class PrintPageAction extends AbstractAction {
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public PrintPageAction(ImageIcon icon) {
+    public PrintPageAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Print", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the PrintPageAction Constructor
 

@@ -28,6 +28,7 @@ public class PageSetupAction extends AbstractAction {
         super("Page Setup", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+
         /*javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
         JDialog dialog = new JDialog(javaTextEditor, "Page Setup", true);
         dialog.setLocationRelativeTo(javaTextEditor);

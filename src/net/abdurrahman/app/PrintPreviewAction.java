@@ -10,14 +10,17 @@ import java.awt.event.ActionEvent;
  * @version 1.0.0
  */
 public class PrintPreviewAction extends AbstractAction {
+    //Instance variables
+    JavaTextEditor javaTextEditor;
     /**
      * PrintPreviewAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public PrintPreviewAction(ImageIcon icon) {
+    public PrintPreviewAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Print Preview", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the PrintPreviewAction Constructor
 

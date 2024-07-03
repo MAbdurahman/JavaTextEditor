@@ -4,14 +4,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class NewWindowAction extends AbstractAction {
+    //Instance variables
+    JavaTextEditor javaTextEditor;
+
     /**
      * NewWindowAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public NewWindowAction(ImageIcon icon) {
+    public NewWindowAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("New Window", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the NewWindowAction Constructor
 

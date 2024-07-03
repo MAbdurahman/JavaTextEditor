@@ -6,9 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
-import static net.abdurrahman.app.JavaTextEditor.TEXTPANE;
-
-
 /**
  * OpenFileAction Class
  *
@@ -40,7 +37,7 @@ public class OpenFileAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        /** Assign image to parent and later assign to JFileChooser */
+        /* Assign image to parent and later assign to JFileChooser */
         JFrame parent = new JFrame();
         parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
@@ -72,7 +69,8 @@ public class OpenFileAction extends AbstractAction {
                     string2.append(string1).append("\n");
                 }
 
-                TEXTPANE.setText(string2.toString());
+                //TEXTPANE.setText(string2.toString());
+                JavaTextEditor.TEXTPANE.setText(string2.toString());
 
                 bufferedReader.close();
 

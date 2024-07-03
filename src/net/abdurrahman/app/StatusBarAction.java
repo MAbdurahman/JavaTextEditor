@@ -10,15 +10,17 @@ import java.awt.event.ActionEvent;
  * @version 1.0.0
  */
 public class StatusBarAction extends AbstractAction {
-
+    //Instance variables
+    JavaTextEditor javaTextEditor;
     /**
      * StatusBarAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public StatusBarAction(ImageIcon icon) {
+    public StatusBarAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Status Bar", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the StatusBarAction Constructor
 

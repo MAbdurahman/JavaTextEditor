@@ -10,15 +10,19 @@ import java.awt.event.ActionEvent;
  * @version 1.0.0
  */
 public class LineNumbersAction extends AbstractAction {
+    //Instance variables
+    JavaTextEditor javaTextEditor;
+
 
     /**
      * LineNumbersAction Constructor -
      * @param icon - the ImageIcon
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public LineNumbersAction(ImageIcon icon) {
+    public LineNumbersAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("Line Numbers", icon);
         setEnabled(true);
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the LineNumbersAction Constructor
 

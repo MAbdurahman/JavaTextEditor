@@ -13,14 +13,15 @@ import static net.abdurrahman.app.JavaTextEditor.selectAllItem;
  */
 public class SelectAllAction extends AbstractAction {
 
-    JavaTextEditor textEditor;
+    JavaTextEditor javaTextEditor;
     /**
      * SelectionAllAction Constructor -
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public SelectAllAction(ImageIcon icon) {
+    public SelectAllAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
         super("SelectAll", icon);
         setEnabled(!TEXTPANE.getText().isEmpty());
+        this.javaTextEditor = javaTextEditor;
 
     }//end of the SelectionAllAction Constructor
     /**
@@ -56,7 +57,7 @@ public class SelectAllAction extends AbstractAction {
             } else {
                 message = "Error: " + ex.getMessage();
             }
-            JOptionPane.showMessageDialog(textEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
         updateSelectAllAction();
 
