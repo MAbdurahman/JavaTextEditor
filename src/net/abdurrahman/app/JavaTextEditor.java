@@ -2,7 +2,6 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.StyledEditorKit;
@@ -47,10 +46,10 @@ public class JavaTextEditor extends JFrame {
     private JMenuItem exitItem;
     private JMenu printerMenu;
 
-    protected boolean hasChanged;
-    protected boolean hasLineNumbers;
-    protected boolean hasStatusBar;
-    protected boolean hasWordWrap;
+    protected static boolean HAS_CHANGED;
+    protected static boolean HAS_LINE_NUMBERS;
+    protected static boolean HAS_STATUS_BAR;
+    protected static boolean HAS_WORD_WRAP;
 
     /** MenuItems for the editMenu */
     protected JMenuItem undoItem, redoItem;
@@ -222,10 +221,10 @@ public class JavaTextEditor extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane);
         this.setVisible(true);
-        hasChanged = false;
-        hasLineNumbers = true;
-        hasStatusBar = true;
-        hasWordWrap = true;
+        HAS_CHANGED = false;
+        HAS_LINE_NUMBERS = true;
+        HAS_STATUS_BAR = true;
+        HAS_WORD_WRAP = true;
 
 
         /** Initialization of UndoManager, undoAction, redoAction, and other editMenuItems */
@@ -280,7 +279,7 @@ public class JavaTextEditor extends JFrame {
 
                 }
                 TEXTPANE.getDocument().getLength();
-                hasChanged = true;
+                HAS_CHANGED = true;
 
 
             }//end of the changedUpdate Method
@@ -292,7 +291,7 @@ public class JavaTextEditor extends JFrame {
             public void removeUpdate(DocumentEvent de) {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
-                hasChanged = true;
+                HAS_CHANGED = true;
 
 
             }//end of the removeUpdate Method
@@ -304,7 +303,7 @@ public class JavaTextEditor extends JFrame {
             public void insertUpdate(DocumentEvent de) {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
-                hasChanged = true;
+                HAS_CHANGED = true;
 
 
             }//end of the insertUpdate Method
@@ -475,9 +474,9 @@ public class JavaTextEditor extends JFrame {
         statusBarCheckboxItem.setFont(menuItemFont);
         wordWrapCheckboxItem.setFont(menuItemFont);
 
-        lineNumberCheckboxItem.setSelected(hasLineNumbers);
-        statusBarCheckboxItem.setSelected(hasStatusBar);
-        wordWrapCheckboxItem.setSelected(hasWordWrap);
+        lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
+        statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
+        wordWrapCheckboxItem.setSelected(HAS_WORD_WRAP);
 
         viewMenu.add(lineNumberCheckboxItem);
         viewMenu.addSeparator();
