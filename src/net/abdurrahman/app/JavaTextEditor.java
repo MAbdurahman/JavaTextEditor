@@ -59,7 +59,7 @@ public class JavaTextEditor extends JFrame {
     /** MenuItems for the viewMenu */
     protected JCheckBoxMenuItem lineNumberCheckboxItem;
     protected JCheckBoxMenuItem statusBarCheckboxItem;
-    protected JCheckBoxMenuItem wordWrapCheckboxItem;
+    /*protected JCheckBoxMenuItem wordWrapCheckboxItem;*/
 
     /** MenuItems for the formatMenu */
     private JMenu fontMenu, colorMenu, alignMenu;
@@ -112,7 +112,7 @@ public class JavaTextEditor extends JFrame {
     /** ViewMenu and its menuItems Abstract Actions */
     LineNumbersAction lineNumbersAction;
     StatusBarAction statusBarAction;
-    WordWrapAction wordWrapAction;
+/*    WordWrapAction wordWrapAction;*/
 
     /**
      * JavaTextEditor Default Constructor
@@ -211,7 +211,7 @@ public class JavaTextEditor extends JFrame {
         ImageIcon superscriptIcon = new ImageIcon(getClass().getResource("../img/superscript.png"));
         ImageIcon underlineIcon = new ImageIcon(getClass().getResource("../img/underline.png"));
         ImageIcon undoIcon = new ImageIcon(getClass().getResource("../img/undo.png"));
-        ImageIcon wordWrapIcon = new ImageIcon(getClass().getResource("../img/wordWrap.png"));
+        /*ImageIcon wordWrapIcon = new ImageIcon(getClass().getResource("../img/wordWrap.png"));*/
 
         /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
@@ -467,22 +467,22 @@ public class JavaTextEditor extends JFrame {
         statusBarAction = new StatusBarAction(statusBarIcon, this);
         statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
 
-        wordWrapAction = new WordWrapAction(wordWrapIcon);
-        wordWrapCheckboxItem = new JCheckBoxMenuItem(wordWrapAction);
+        /*wordWrapAction = new WordWrapAction(wordWrapIcon);
+        wordWrapCheckboxItem = new JCheckBoxMenuItem(wordWrapAction);*/
 
         lineNumberCheckboxItem.setFont(menuItemFont);
         statusBarCheckboxItem.setFont(menuItemFont);
-        wordWrapCheckboxItem.setFont(menuItemFont);
+        /*wordWrapCheckboxItem.setFont(menuItemFont);*/
 
         lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
         statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
-        wordWrapCheckboxItem.setSelected(HAS_WORD_WRAP);
+        /*wordWrapCheckboxItem.setSelected(HAS_WORD_WRAP);*/
 
         viewMenu.add(lineNumberCheckboxItem);
         viewMenu.addSeparator();
         viewMenu.add(statusBarCheckboxItem);
-        viewMenu.addSeparator();
-        viewMenu.add(wordWrapCheckboxItem);
+        /*viewMenu.addSeparator();
+        viewMenu.add(wordWrapCheckboxItem);*/
 
         /************* Create the Menus and MenuItems for the formatMenu *************/
         fontMenu = new JMenu("Fonts...");

@@ -37,7 +37,7 @@ public class OpenFileAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        /* Assign image to parent and later assign to JFileChooser */
+        /* Assign ImageIcon to parent and later assign to JFileChooser */
         JFrame parent = new JFrame();
         parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 

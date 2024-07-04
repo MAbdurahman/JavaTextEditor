@@ -31,7 +31,7 @@ public class NewFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         String fileName = javaTextEditor.getTitle();
-        if (JavaTextEditor.HAS_CHANGED) {
+        if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != "") {
             showDialog();
 
         } else if (fileName.equalsIgnoreCase("Untitled - TextEditor")) {
