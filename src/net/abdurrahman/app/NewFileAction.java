@@ -68,15 +68,16 @@ public class NewFileAction extends AbstractAction {
         jFileChooser.setDialogTitle("Save As...");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *rtf, *.txt)";
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
+                ".cpp", ".css", ".html", ".htm", ".java", ".js", ".rtf", ".txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         String file = javaTextEditor.getTitle();
-        int returnedValue = jFileChooser.showSaveDialog(parent);
+        jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
+        int userSelection = jFileChooser.showSaveDialog(parent);
 
-        if (returnedValue == JFileChooser.APPROVE_OPTION) {
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();
             fileName = selectedFile.getName();
             filePath = selectedFile.getAbsolutePath();

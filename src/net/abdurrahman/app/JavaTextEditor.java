@@ -49,7 +49,7 @@ public class JavaTextEditor extends JFrame {
     protected static boolean HAS_CHANGED;
     protected static boolean HAS_LINE_NUMBERS;
     protected static boolean HAS_STATUS_BAR;
-    protected static boolean HAS_WORD_WRAP;
+    /*protected static boolean HAS_WORD_WRAP;*/
 
     /** MenuItems for the editMenu */
     protected JMenuItem undoItem, redoItem;
@@ -224,8 +224,6 @@ public class JavaTextEditor extends JFrame {
         HAS_CHANGED = false;
         HAS_LINE_NUMBERS = true;
         HAS_STATUS_BAR = true;
-        HAS_WORD_WRAP = true;
-
 
         /** Initialization of UndoManager, undoAction, redoAction, and other editMenuItems */
         undoManager = new UndoManager();
