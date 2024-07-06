@@ -49,7 +49,6 @@ public class JavaTextEditor extends JFrame {
     protected static boolean HAS_CHANGED;
     protected static boolean HAS_LINE_NUMBERS;
     protected static boolean HAS_STATUS_BAR;
-    /*protected static boolean HAS_WORD_WRAP;*/
 
     /** MenuItems for the editMenu */
     protected JMenuItem undoItem, redoItem;
@@ -59,7 +58,6 @@ public class JavaTextEditor extends JFrame {
     /** MenuItems for the viewMenu */
     protected JCheckBoxMenuItem lineNumberCheckboxItem;
     protected JCheckBoxMenuItem statusBarCheckboxItem;
-    /*protected JCheckBoxMenuItem wordWrapCheckboxItem;*/
 
     /** MenuItems for the formatMenu */
     private JMenu fontMenu, colorMenu, alignMenu;
@@ -112,7 +110,6 @@ public class JavaTextEditor extends JFrame {
     /** ViewMenu and its menuItems Abstract Actions */
     LineNumbersAction lineNumbersAction;
     StatusBarAction statusBarAction;
-/*    WordWrapAction wordWrapAction;*/
 
     /**
      * JavaTextEditor Default Constructor
@@ -211,7 +208,7 @@ public class JavaTextEditor extends JFrame {
         ImageIcon superscriptIcon = new ImageIcon(getClass().getResource("../img/superscript.png"));
         ImageIcon underlineIcon = new ImageIcon(getClass().getResource("../img/underline.png"));
         ImageIcon undoIcon = new ImageIcon(getClass().getResource("../img/undo.png"));
-        /*ImageIcon wordWrapIcon = new ImageIcon(getClass().getResource("../img/wordWrap.png"));*/
+
 
         /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
@@ -327,26 +324,23 @@ public class JavaTextEditor extends JFrame {
         /*********** create the menus, their attributes and add them to the menuBar ***********/
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
-        viewMenu = new JMenu("View");
         formatMenu = new JMenu("Format");
+        viewMenu = new JMenu("View");
         helpMenu = new JMenu("Help");
 
         fileMenu.setFont(menuFont);
         editMenu.setFont(menuFont);
-        viewMenu.setFont(menuFont);
         formatMenu.setFont(menuFont);
+        viewMenu.setFont(menuFont);
         helpMenu.setFont(menuFont);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
-        menuBar.add(viewMenu);
         menuBar.add(formatMenu);
+        menuBar.add(viewMenu);
         menuBar.add(helpMenu);
 
         /** Create the Menu and MenuItem for the fileMenu */
-        printerMenu = new JMenu("Printer...");
-        printerMenu.setIcon(printerIcon);
-
         newFileAction = new NewFileAction(newFileIcon, this);
         newFileItem = new JMenuItem(newFileAction);
 
@@ -364,6 +358,9 @@ public class JavaTextEditor extends JFrame {
 
         pageSetupAction  = new PageSetupAction(pageSetupIcon, this);
         pageSetupItem = new JMenuItem(pageSetupAction);
+
+        printerMenu = new JMenu("Printer...");
+        printerMenu.setIcon(printerIcon);
 
         printPageAction  = new PrintPageAction(printIcon, this);
         printPageItem = new JMenuItem(printPageAction);
@@ -387,7 +384,6 @@ public class JavaTextEditor extends JFrame {
 
         /** Shortcut KeyStrokes for JMenuItems for the fileMenu */
         newFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-        /*newWindowItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));*/
         openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         saveFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         saveAsFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
@@ -457,30 +453,6 @@ public class JavaTextEditor extends JFrame {
         editMenu.add(selectAllItem);
         editMenu.addSeparator();
         editMenu.add(dateTimeItem);
-
-        /************* Create the CheckboxMenuItems for the viewMenu **************/
-        lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
-        lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
-
-        statusBarAction = new StatusBarAction(statusBarIcon, this);
-        statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
-
-        /*wordWrapAction = new WordWrapAction(wordWrapIcon);
-        wordWrapCheckboxItem = new JCheckBoxMenuItem(wordWrapAction);*/
-
-        lineNumberCheckboxItem.setFont(menuItemFont);
-        statusBarCheckboxItem.setFont(menuItemFont);
-        /*wordWrapCheckboxItem.setFont(menuItemFont);*/
-
-        lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
-        statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
-        /*wordWrapCheckboxItem.setSelected(HAS_WORD_WRAP);*/
-
-        viewMenu.add(lineNumberCheckboxItem);
-        viewMenu.addSeparator();
-        viewMenu.add(statusBarCheckboxItem);
-        /*viewMenu.addSeparator();
-        viewMenu.add(wordWrapCheckboxItem);*/
 
         /************* Create the Menus and MenuItems for the formatMenu *************/
         fontMenu = new JMenu("Fonts...");
@@ -608,6 +580,24 @@ public class JavaTextEditor extends JFrame {
         colorMenu.addSeparator();
         colorMenu.add(moreColorsItem);
 
+
+        /************* Create the CheckboxMenuItems for the viewMenu **************/
+        lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
+        lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
+
+        statusBarAction = new StatusBarAction(statusBarIcon, this);
+        statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
+
+        lineNumberCheckboxItem.setFont(menuItemFont);
+        statusBarCheckboxItem.setFont(menuItemFont);
+
+        lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
+        statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
+
+        viewMenu.add(lineNumberCheckboxItem);
+        viewMenu.addSeparator();
+        viewMenu.add(statusBarCheckboxItem);
+
         /************************* helpMenu and its menuItems *************************/
         /**Create the MenuItem for the helpMenu*/
         helpItem = new JMenuItem("View Help", helpIcon);
@@ -619,8 +609,8 @@ public class JavaTextEditor extends JFrame {
         /** Shortcut KeyStroke for the JMenuItem in the helpMenu */
         helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.CTRL_MASK));
         helpItem.addActionListener(new HelpDialog(this, "View Help", true));
-        aboutItem.addActionListener(new AboutDialog(this, "About Editor", true));
         aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.CTRL_MASK));
+        aboutItem.addActionListener(new AboutDialog(this, "About Editor", true));
 
         helpMenu.add(helpItem);
         helpMenu.addSeparator();
@@ -923,6 +913,5 @@ public class JavaTextEditor extends JFrame {
 
             }// end of the run Method for the Anonymous Runnable
         });// end of the Anonymous Runnable
-
     }// end of the main Method
 }//end of JavaTextEditor Class
