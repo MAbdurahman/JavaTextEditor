@@ -38,21 +38,21 @@ public class OpenFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        JFrame parent = new JFrame();
-        parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+        /*JFrame parent = new JFrame();*/
+        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Open File");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *rtf, *.txt)";
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                ".cpp", ".css", ".html", ".htm", ".java", ".js", ".rtf", ".txt");
+                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        int checkInput = jFileChooser.showOpenDialog(parent);
+        int userSelection = jFileChooser.showOpenDialog(javaTextEditor);
 
-        if (checkInput == JFileChooser.APPROVE_OPTION) {
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
             File openedFile = jFileChooser.getSelectedFile();
             String openedFileName = openedFile.getName();
             javaTextEditor.setTitle(openedFileName + " - TextEditor");
@@ -69,11 +69,9 @@ public class OpenFileAction extends AbstractAction {
                     string2.append(string1).append("\n");
                 }
 
-                //TEXTPANE.setText(string2.toString());
                 JavaTextEditor.TEXTPANE.setText(string2.toString());
 
                 bufferedReader.close();
-
 
             } catch (IOException ex) {
                 String message = ex.getMessage();

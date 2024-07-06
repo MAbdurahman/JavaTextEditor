@@ -43,7 +43,7 @@ public class SaveAsFileAction extends AbstractAction {
         jFileChooser.setAcceptAllFileFilterUsed(false);
         String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                ".cpp", ".css", ".html", ".htm", ".java", ".js", ".rtf", ".txt");
+                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         String file = javaTextEditor.getTitle();
