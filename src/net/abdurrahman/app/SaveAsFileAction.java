@@ -47,9 +47,9 @@ public class SaveAsFileAction extends AbstractAction {
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         String file = javaTextEditor.getTitle();
-        int returnedValue = jFileChooser.showSaveDialog(parent);
+        int userSelection = jFileChooser.showSaveDialog(parent);
 
-        if (returnedValue == JFileChooser.APPROVE_OPTION) {
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();
             fileName = selectedFile.getName();
             filePath = selectedFile.getAbsolutePath();
@@ -77,7 +77,6 @@ public class SaveAsFileAction extends AbstractAction {
         }
     }//end of actionPerformed Method
 
-
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String
      * @param text - the specified String
@@ -87,4 +86,24 @@ public class SaveAsFileAction extends AbstractAction {
         return text.substring(0, text.length() - 13);
 
     }//end of removeExtraCharacters Method
+
+    public static void saveAsFileActionDialog () {
+
+    }//end of saveAsFileActionDialog Method
+
+    public static void saveAsHTMLFileActionDialog () {
+
+    }//end of saveAsHTMLFileActionDialog Method
+
+    public static void saveAsRTFFileActionDialog () {
+
+    }//end of saveAsRTFFileActionDialog Method
+
+    public static void showConfirmSaveAsDialog(JavaTextEditor javaTextEditor) {
+
+    }//end of showConfirmSaveAsDialog Method
+
+    public static void showConfirmSaveAsMessageDialog(JavaTextEditor javaTextEditor) {
+
+    }//end of showConfirmSaveAsMessageDialog Method
 }//end of SaveAsFileAction Class

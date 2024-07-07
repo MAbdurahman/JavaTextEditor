@@ -94,4 +94,24 @@ public class SaveFileAction extends AbstractAction {
         return text.substring(0, text.length() - 13);
 
     }//end of removeExtraCharacters Method
+
+    public static void saveFileActionDialog () {
+
+    }//end of saveFileActionDialog Method
+
+    public static void saveHTMLFileActionDialog () {
+
+    }//end of saveHTMLFileActionDialog Method
+
+    public static void saveRTFFileActionDialog () {
+
+    }//end of saveRTFFileActionDialogMethod
+
+    public static void showConfirmSaveDialog () {
+
+    }//end of showConfirmSaveDialog Method
+
+    public static void showConfirmSaveMessageDialog () {
+
+    }//end of showConfirmSaveMessageDialog Method
 }//end of SaveFileAction Class
