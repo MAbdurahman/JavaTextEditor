@@ -135,7 +135,7 @@ public class JavaTextEditor extends JFrame {
 
     private void initComponents() {
         this.setVisible(true);
-        this.setTitle("Untitled - TextEditor");
+        this.setTitle("Untitled.txt - TextEditor");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -626,6 +626,16 @@ public class JavaTextEditor extends JFrame {
         return  TEXTPANE;
 
     }//end of the getTextPane Method
+
+    /**
+     * removeExtraCharacters Method - removes the last thirteen characters from a String
+     * @param text - the specified String
+     * @return String - a String with the last thirteen characters removed
+     */
+    public static String removeExtraCharacters(String text) {
+        return text.substring(0, text.length() - 13);
+
+    }//end of removeExtraCharacters Method
 
     /************************* UndoAction and RedoAction Classes *************************/
     /**

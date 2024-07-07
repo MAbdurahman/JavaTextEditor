@@ -41,8 +41,8 @@ public class SaveFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        JFrame parent = new JFrame();
-        parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+        /*JFrame parent = new JFrame();*/
+        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Save");
@@ -56,7 +56,7 @@ public class SaveFileAction extends AbstractAction {
 
         String file = javaTextEditor.getTitle();
         jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
-        int userSelection = jFileChooser.showSaveDialog(parent);
+        int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();

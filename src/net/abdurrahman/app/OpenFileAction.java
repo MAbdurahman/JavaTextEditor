@@ -56,8 +56,8 @@ public class OpenFileAction extends AbstractAction {
             File openedFile = jFileChooser.getSelectedFile();
             String openedFileName = openedFile.getName();
             javaTextEditor.setTitle(openedFileName + " - TextEditor");
-            /*parent.setTitle(openedFileName);*/
             System.out.println(openedFileName);
+
             try {
                 FileReader fileReader = new FileReader(openedFile);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -79,5 +79,20 @@ public class OpenFileAction extends AbstractAction {
                 ex.printStackTrace();
             }
         }
+
     }//end of actionPerformed Method
+
+    public static void openFileActionDialog () {
+        JFileChooser jFileChooser = new JFileChooser();
+
+    }//end of openFileActionDialog Method
+
+    public static void openHTMLFileActionDialog () {
+        JFileChooser jFileChooser = new JFileChooser();
+
+    }//end of openHTMLFileActionDialog Method
+
+    public static void openRTFFileActionDialog () {
+
+    }//end of openRTFFileActionDialog Method
 }//end of OpenFileAction Class
