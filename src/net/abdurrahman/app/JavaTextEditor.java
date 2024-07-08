@@ -2,9 +2,12 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.text.EditorKit;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.StyledEditorKit;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.rtf.RTFEditorKit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -636,6 +639,7 @@ public class JavaTextEditor extends JFrame {
         return text.substring(0, text.length() - 13);
 
     }//end of removeExtraCharacters Method
+
 
     /************************* UndoAction and RedoAction Classes *************************/
     /**

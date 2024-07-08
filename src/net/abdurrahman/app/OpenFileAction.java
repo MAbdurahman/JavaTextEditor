@@ -2,6 +2,7 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -17,7 +18,6 @@ import java.io.IOException;
  * @date 26 June 2024
  */
 public class OpenFileAction extends AbstractAction {
-
     //Instance variables
     JavaTextEditor javaTextEditor;
 
@@ -25,6 +25,7 @@ public class OpenFileAction extends AbstractAction {
      * OpenFileAction Constructor -
      *
      * @param icon - the ImageIcon
+     * @param javaTextEditor - the JavaTextEditor
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public OpenFileAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
@@ -32,14 +33,13 @@ public class OpenFileAction extends AbstractAction {
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
 
-
     }//end of the OpenFileAction Constructor
 
     /**
      * openFileActionDialog Method -
      *
-     * @param openedFile
-     * @param javaTextEditor
+     * @param openedFile - the selected File
+     * @param javaTextEditor - the instance of JavaTextEditor
      */
     public static void openFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
 
@@ -70,8 +70,8 @@ public class OpenFileAction extends AbstractAction {
     /**
      * openHTMLFileActionDialog Method
      *
-     * @param openedFile
-     * @param javaTextEditor
+     * @param openedFile - the selected File
+     * @param javaTextEditor - the instance of JavaTextEditor
      */
     public static void openHTMLFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
         System.out.println(openedFile);
@@ -93,7 +93,7 @@ public class OpenFileAction extends AbstractAction {
     /**
      * actionPerformed Method -
      *
-     * @param ae the event to be processed
+     * @param ae the ActionEvent to be processed
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -127,4 +127,6 @@ public class OpenFileAction extends AbstractAction {
             }
         }
     }//end of actionPerformed Method
+
+
 }//end of OpenFileAction Class
