@@ -74,7 +74,7 @@ public class OpenFileAction extends AbstractAction {
      * @param javaTextEditor - the instance of JavaTextEditor
      */
     public static void openHTMLFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
-        System.out.println(openedFile);
+        System.out.println(openedFile.getAbsolutePath());
         System.out.println(openedFile.getName() + " ends with .html or .htm");
 
     }//end of openHTMLFileActionDialog Method
@@ -86,7 +86,7 @@ public class OpenFileAction extends AbstractAction {
      * @param javaTextEditor - the instance of JavaTextEditor
      */
     public static void openRTFFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
-        System.out.println(openedFile);
+        System.out.println(openedFile.getAbsolutePath());
         System.out.println(openedFile.getName() + " ends with .rtf");
     }//end of openRTFFileActionDialog Method
 

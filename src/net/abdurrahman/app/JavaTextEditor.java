@@ -29,6 +29,10 @@ public class JavaTextEditor extends JFrame {
     /** Instance Variables */
     private StyledDocument styledDocument;
     public static JTextPane TEXTPANE;
+    public static JEditorPane EDITOR_PANE;
+    public static RTFEditorKit RTF_EDITOR;
+    public static HTMLEditorKit HTML_EDITOR;
+
     private File currentFile;
     private PrinterJob printJob;
     private PageFormat pageFormat;
@@ -215,6 +219,10 @@ public class JavaTextEditor extends JFrame {
 
         /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
+        EDITOR_PANE = new JEditorPane();
+        HTML_EDITOR = new HTMLEditorKit();
+        RTF_EDITOR = new RTFEditorKit();
+
         TEXTPANE.setFont(new Font("Verdana", Font.PLAIN, 14));
         this.add(TEXTPANE);
         JScrollPane scrollPane = new JScrollPane(TEXTPANE);
@@ -583,7 +591,6 @@ public class JavaTextEditor extends JFrame {
         colorMenu.addSeparator();
         colorMenu.add(moreColorsItem);
 
-
         /************* Create the CheckboxMenuItems for the viewMenu **************/
         lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
         lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
@@ -629,6 +636,16 @@ public class JavaTextEditor extends JFrame {
         return  TEXTPANE;
 
     }//end of the getTextPane Method
+
+    public static RTFEditorKit getRTFEditor() {
+        return RTF_EDITOR;
+
+    }//end of getRTFEditorKit Method
+
+    public static HTMLEditorKit getHTMLEditor() {
+        return HTML_EDITOR;
+
+    }//end of getHTMLEditorKit Method
 
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String
