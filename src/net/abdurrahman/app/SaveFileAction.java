@@ -48,9 +48,9 @@ public class SaveFileAction extends AbstractAction {
         jFileChooser.setDialogTitle("Save");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.php, *.scss, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
+                "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
 
@@ -98,14 +98,6 @@ public class SaveFileAction extends AbstractAction {
     public static void saveFileActionDialog () {
 
     }//end of saveFileActionDialog Method
-
-    public static void saveHTMLFileActionDialog () {
-
-    }//end of saveHTMLFileActionDialog Method
-
-    public static void saveRTFFileActionDialog () {
-
-    }//end of saveRTFFileActionDialogMethod
 
     public static void showConfirmSaveDialog () {
 
