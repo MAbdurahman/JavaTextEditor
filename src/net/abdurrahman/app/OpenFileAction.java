@@ -2,13 +2,11 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * OpenFileAction Class
@@ -88,6 +86,45 @@ public class OpenFileAction extends AbstractAction {
     public static void openRTFFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
         System.out.println(openedFile.getAbsolutePath());
         System.out.println(openedFile.getName() + " ends with .rtf");
+
+        JavaTextEditor.TEXTPANE.setEditorKit(JavaTextEditor.RTF_EDITOR);
+
+        FileInputStream fileInputStream = null;
+        try {
+
+            fileInputStream = new FileInputStream(openedFile);
+            JavaTextEditor.RTF_EDITOR.read(fileInputStream, JavaTextEditor.TEXTPANE.getDocument(), 0);
+
+
+        } catch (Exception ex) {
+            String message = "";
+            if (ex instanceof FileNotFoundException) {
+                message = "File not found";
+
+            } else if (ex instanceof IOException) {
+                message = "Error opening file";
+
+            } else if (ex instanceof RuntimeException) {
+                message = "Unexpected error";
+
+            } else {
+                message = "Bad location within document does not exist.";
+
+            }
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+//            JavaTextEditor.TEXTPANE.setEditorKit(JavaTextEditor.TEXTPANE.getEditorKit());
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException ex) {
+                    String message = "Error closing file " + openedFile.getAbsolutePath();
+                    JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+
     }//end of openRTFFileActionDialog Method
 
     /**
@@ -127,6 +164,4 @@ public class OpenFileAction extends AbstractAction {
             }
         }
     }//end of actionPerformed Method
-
-
 }//end of OpenFileAction Class

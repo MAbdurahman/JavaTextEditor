@@ -33,6 +33,8 @@ public class JavaTextEditor extends JFrame {
     public static RTFEditorKit RTF_EDITOR;
     public static HTMLEditorKit HTML_EDITOR;
 
+    public static Container CONTAINER;
+
     private File currentFile;
     private PrinterJob printJob;
     private PageFormat pageFormat;
@@ -223,8 +225,15 @@ public class JavaTextEditor extends JFrame {
         HTML_EDITOR = new HTMLEditorKit();
         RTF_EDITOR = new RTFEditorKit();
 
+        CONTAINER = this.getContentPane();
+        CONTAINER.setLayout(new BorderLayout());
+        CONTAINER.add(TEXTPANE, BorderLayout.CENTER);
+
+
+
         TEXTPANE.setFont(new Font("Verdana", Font.PLAIN, 14));
-        this.add(TEXTPANE);
+
+        /*this.add(TEXTPANE);*/
         JScrollPane scrollPane = new JScrollPane(TEXTPANE);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane);
