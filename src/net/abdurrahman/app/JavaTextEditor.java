@@ -115,8 +115,8 @@ public class JavaTextEditor extends JFrame {
     protected ExitAction exitAction;
 
     /** ViewMenu and its menuItems Abstract Actions */
-    LineNumbersAction lineNumbersAction;
-    StatusBarAction statusBarAction;
+   protected LineNumbersAction lineNumbersAction;
+   protected StatusBarAction statusBarAction;
 
     /**
      * JavaTextEditor Default Constructor
@@ -219,15 +219,11 @@ public class JavaTextEditor extends JFrame {
 
         /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
-        RTF_EDITOR = new RTFEditorKit();
+        TEXTPANE.setFont(new Font("Verdana", Font.PLAIN, 14));
 
         CONTAINER = this.getContentPane();
         CONTAINER.setLayout(new BorderLayout());
         CONTAINER.add(TEXTPANE, BorderLayout.CENTER);
-
-
-
-        TEXTPANE.setFont(new Font("Verdana", Font.PLAIN, 14));
 
         /*this.add(TEXTPANE);*/
         JScrollPane scrollPane = new JScrollPane(TEXTPANE);
@@ -787,7 +783,7 @@ public class JavaTextEditor extends JFrame {
             setFont(new Font("Lucida Console", Font.PLAIN, 12));
             text.append("TextEditor is a stand-alone application that allows users to create and\n");
             text.append("manipulate computer files with the extensions, .cpp, .css, .html, .java\n");
-            text.append(".js, .rtf, and .txt. This application not only allows for the creation\n");
+            text.append(".js, .php, and .txt. This application not only allows for the creation\n");
             text.append("and storage of these text files, but users can manipulate text fonts,\n");
             text.append("colors, and alignments. In addition to allowing basic functions like\n");
             text.append("cut, copy, and paste, users are allowed to find and replace desired\n");

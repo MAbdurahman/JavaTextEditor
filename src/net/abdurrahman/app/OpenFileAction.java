@@ -42,11 +42,6 @@ public class OpenFileAction extends AbstractAction {
      */
     public static void openFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
 
-        /*System.out.println(openedFile.getName() + " ends with .rtf");*/
-        StyledEditorKit styledEditorKit = new StyledEditorKit();
-
-        JavaTextEditor.TEXTPANE.setEditorKit(styledEditorKit);
-
         String fileName = openedFile.getName();
         if (fileName.endsWith(".cpp")) {
             JavaTextEditor.TEXTPANE.setContentType("text/cpp");
@@ -66,10 +61,15 @@ public class OpenFileAction extends AbstractAction {
         if (fileName.endsWith(".js")) {
             JavaTextEditor.TEXTPANE.setContentType("text/js");
         }
+        if (fileName.endsWith(".php")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/php");
+        }
+        if (fileName.endsWith(".scss")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/scss");
+        }
         if (fileName.endsWith(".txt")) {
             JavaTextEditor.TEXTPANE.setContentType("text/plain");
         }
-
 
         BufferedReader bufferedReader = null;
         try {
@@ -104,65 +104,15 @@ public class OpenFileAction extends AbstractAction {
             }
         }
 
-        if (!JavaTextEditor.TEXTPANE.getText().isEmpty()) {
+        /*if (!JavaTextEditor.TEXTPANE.getText().isEmpty()) {
             JavaTextEditor.undoItem.setEnabled(true);
             JavaTextEditor.undoAction.updateUndoAction();
             JavaTextEditor.selectAllAction.updateSelectAllAction();
             JavaTextEditor.findAction.updateFindAction();
             JavaTextEditor.findAndReplaceAction.updateFindAndReplaceAction();
 
-        }
-
+        }*/
     }//end of openFileActionDialog Method
-
-    /**
-     * openRTFFileActionDialog Method -
-     *
-     * @param openedFile - the selected File
-     * @param javaTextEditor - the instance of JavaTextEditor
-     */
-    public static void openRTFFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
-        System.out.println(openedFile.getAbsolutePath());
-        System.out.println(openedFile.getName() + " ends with .rtf");
-
-        JavaTextEditor.TEXTPANE.setEditorKit(JavaTextEditor.RTF_EDITOR);
-        JavaTextEditor.TEXTPANE.setContentType(JavaTextEditor.RTF_EDITOR.getContentType());
-
-
-        FileInputStream fileInputStream = null;
-        try {
-
-            fileInputStream = new FileInputStream(openedFile);
-            JavaTextEditor.RTF_EDITOR.read(fileInputStream, JavaTextEditor.TEXTPANE.getDocument(), 0);
-
-
-        } catch (Exception ex) {
-            String message = "";
-            if (ex instanceof FileNotFoundException) {
-                message = "File not found";
-
-            } else if (ex instanceof IOException) {
-                message = "Error opening file";
-
-            } else if (ex instanceof RuntimeException) {
-                message = "Unexpected error";
-
-            } else {
-                message = "Bad location within document does not exist.";
-
-            }
-            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException ex) {
-                    String message = "Error closing file " + openedFile.getAbsolutePath();
-                    JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }//end of openRTFFileActionDialog Method
 
     /**
      * actionPerformed Method -
@@ -177,9 +127,9 @@ public class OpenFileAction extends AbstractAction {
         jFileChooser.setDialogTitle("Open File");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *php, *scss, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
+                "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         int userSelection = jFileChooser.showOpenDialog(javaTextEditor);
@@ -190,12 +140,7 @@ public class OpenFileAction extends AbstractAction {
             javaTextEditor.setTitle(openedFileName + " - TextEditor");
             System.out.println(openedFileName);
 
-            if (openedFileName.endsWith(".rtf")) {
-                openRTFFileActionDialog(openedFile, javaTextEditor);
-
-            } else {
-                openFileActionDialog(openedFile, javaTextEditor);
-            }
+            openFileActionDialog(openedFile, javaTextEditor);
         }
     }//end of actionPerformed Method
 }//end of OpenFileAction Class
