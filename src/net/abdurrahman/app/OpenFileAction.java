@@ -86,8 +86,6 @@ public class OpenFileAction extends AbstractAction {
 
             JavaTextEditor.TEXTPANE.setText(string2.toString());
 
-            bufferedReader.close();
-
         } catch (IOException ex) {
             String message = ex.getMessage();
             JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -103,15 +101,6 @@ public class OpenFileAction extends AbstractAction {
                 }
             }
         }
-
-        /*if (!JavaTextEditor.TEXTPANE.getText().isEmpty()) {
-            JavaTextEditor.undoItem.setEnabled(true);
-            JavaTextEditor.undoAction.updateUndoAction();
-            JavaTextEditor.selectAllAction.updateSelectAllAction();
-            JavaTextEditor.findAction.updateFindAction();
-            JavaTextEditor.findAndReplaceAction.updateFindAndReplaceAction();
-
-        }*/
     }//end of openFileActionDialog Method
 
     /**
