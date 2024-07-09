@@ -29,9 +29,7 @@ public class JavaTextEditor extends JFrame {
     /** Instance Variables */
     private StyledDocument styledDocument;
     public static JTextPane TEXTPANE;
-    public static JEditorPane EDITOR_PANE;
     public static RTFEditorKit RTF_EDITOR;
-    public static HTMLEditorKit HTML_EDITOR;
 
     public static Container CONTAINER;
 
@@ -60,7 +58,7 @@ public class JavaTextEditor extends JFrame {
     protected static boolean HAS_STATUS_BAR;
 
     /** MenuItems for the editMenu */
-    protected JMenuItem undoItem, redoItem;
+    static JMenuItem undoItem, redoItem;
     static JMenuItem cutItem, copyItem, deleteItem, pasteItem, findItem, findReplaceItem;
     static JMenuItem selectAllItem, dateTimeItem;
 
@@ -85,7 +83,7 @@ public class JavaTextEditor extends JFrame {
 
     /** UndoManager, UndoAction, RedoAction */
     protected UndoManager undoManager;
-    protected UndoAction undoAction;
+    protected static UndoAction undoAction;
     protected RedoAction redoAction;
 
     /** CopyAction, CutAction, PasteAction */
@@ -221,8 +219,6 @@ public class JavaTextEditor extends JFrame {
 
         /************************* JTextPane and attributes *************************/
         TEXTPANE = new JTextPane();
-        EDITOR_PANE = new JEditorPane();
-        HTML_EDITOR = new HTMLEditorKit();
         RTF_EDITOR = new RTFEditorKit();
 
         CONTAINER = this.getContentPane();
@@ -650,11 +646,6 @@ public class JavaTextEditor extends JFrame {
         return RTF_EDITOR;
 
     }//end of getRTFEditorKit Method
-
-    public static HTMLEditorKit getHTMLEditor() {
-        return HTML_EDITOR;
-
-    }//end of getHTMLEditorKit Method
 
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String

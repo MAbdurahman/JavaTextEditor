@@ -3,6 +3,7 @@ package net.abdurrahman.app;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledEditorKit;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,10 +42,40 @@ public class OpenFileAction extends AbstractAction {
      */
     public static void openFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
 
+        /*System.out.println(openedFile.getName() + " ends with .rtf");*/
+        StyledEditorKit styledEditorKit = new StyledEditorKit();
+
+        JavaTextEditor.TEXTPANE.setEditorKit(styledEditorKit);
+
+        String fileName = openedFile.getName();
+        if (fileName.endsWith(".cpp")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/cpp");
+        }
+        if (fileName.endsWith(".css")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/css");
+        }
+        if (fileName.endsWith(".htm")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/html");
+        }
+        if (fileName.endsWith(".html")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/html");
+        }
+        if (fileName.endsWith(".java")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/java");
+        }
+        if (fileName.endsWith(".js")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/js");
+        }
+        if (fileName.endsWith(".txt")) {
+            JavaTextEditor.TEXTPANE.setContentType("text/plain");
+        }
+
+
+        BufferedReader bufferedReader = null;
         try {
 
             FileReader fileReader = new FileReader(openedFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            bufferedReader = new BufferedReader(fileReader);
 
             String string1 = "";
             StringBuilder string2 = new StringBuilder();
@@ -61,21 +92,28 @@ public class OpenFileAction extends AbstractAction {
             String message = ex.getMessage();
             JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
+
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    String message = "Error closing file " + openedFile.getAbsolutePath();
+                    JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        if (!JavaTextEditor.TEXTPANE.getText().isEmpty()) {
+            JavaTextEditor.undoItem.setEnabled(true);
+            JavaTextEditor.undoAction.updateUndoAction();
+            JavaTextEditor.selectAllAction.updateSelectAllAction();
+            JavaTextEditor.findAction.updateFindAction();
+            JavaTextEditor.findAndReplaceAction.updateFindAndReplaceAction();
+
         }
 
     }//end of openFileActionDialog Method
-
-    /**
-     * openHTMLFileActionDialog Method
-     *
-     * @param openedFile - the selected File
-     * @param javaTextEditor - the instance of JavaTextEditor
-     */
-    public static void openHTMLFileActionDialog(File openedFile, JavaTextEditor javaTextEditor) {
-        System.out.println(openedFile.getAbsolutePath());
-        System.out.println(openedFile.getName() + " ends with .html or .htm");
-
-    }//end of openHTMLFileActionDialog Method
 
     /**
      * openRTFFileActionDialog Method -
@@ -88,6 +126,8 @@ public class OpenFileAction extends AbstractAction {
         System.out.println(openedFile.getName() + " ends with .rtf");
 
         JavaTextEditor.TEXTPANE.setEditorKit(JavaTextEditor.RTF_EDITOR);
+        JavaTextEditor.TEXTPANE.setContentType(JavaTextEditor.RTF_EDITOR.getContentType());
+
 
         FileInputStream fileInputStream = null;
         try {
@@ -113,7 +153,6 @@ public class OpenFileAction extends AbstractAction {
             }
             JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
-//            JavaTextEditor.TEXTPANE.setEditorKit(JavaTextEditor.TEXTPANE.getEditorKit());
             if (fileInputStream != null) {
                 try {
                     fileInputStream.close();
@@ -123,8 +162,6 @@ public class OpenFileAction extends AbstractAction {
                 }
             }
         }
-
-
     }//end of openRTFFileActionDialog Method
 
     /**
@@ -153,10 +190,7 @@ public class OpenFileAction extends AbstractAction {
             javaTextEditor.setTitle(openedFileName + " - TextEditor");
             System.out.println(openedFileName);
 
-            if ((openedFileName.endsWith(".html") || (openedFileName.endsWith(".htm")))) {
-                openHTMLFileActionDialog(openedFile, javaTextEditor);
-
-            } else if (openedFileName.endsWith(".rtf")) {
+            if (openedFileName.endsWith(".rtf")) {
                 openRTFFileActionDialog(openedFile, javaTextEditor);
 
             } else {
