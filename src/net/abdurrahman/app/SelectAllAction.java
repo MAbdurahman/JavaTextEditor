@@ -66,10 +66,6 @@ public class SelectAllAction extends AbstractAction {
      * updateSelectAllAction Method -
      */
     protected void updateSelectAllAction() {
-        /*if (!TEXTPANE.getText().isEmpty()) {
-            setEnabled(!TEXTPANE.getText().isEmpty());
-            putValue(Action.NAME, "Select All");
-        }*/
         if ((TEXTPANE.getSelectionEnd() - TEXTPANE.getSelectionStart()) > 0) {
             selectAllItem.setEnabled(false);
             putValue(Action.NAME, "Select All");
