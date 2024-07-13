@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 public class NewWindowAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    JFileChooser fileChooser;
 
     /**
      * NewWindowAction Constructor -
@@ -16,6 +17,7 @@ public class NewWindowAction extends AbstractAction {
         super("New Window", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.fileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the NewWindowAction Constructor
 
@@ -25,6 +27,14 @@ public class NewWindowAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
+        if (JavaTextEditor.TEXTPANE.getText().isEmpty()) {
+            System.out.println("Text is empty");
+           new JavaTextEditor();
+
+
+        } else {
+            JavaTextEditor.saveFileAction.showConfirmSaveDialog(javaTextEditor, fileChooser);
+        }
 
     }//end of actionPerformed Method
 }//end of NewWindowAction Class

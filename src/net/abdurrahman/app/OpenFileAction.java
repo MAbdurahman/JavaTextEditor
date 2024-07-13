@@ -19,6 +19,7 @@ import java.io.*;
 public class OpenFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    JFileChooser jFileChooser;
 
     /**
      * OpenFileAction Constructor -
@@ -31,6 +32,7 @@ public class OpenFileAction extends AbstractAction {
         super("Open", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.jFileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the OpenFileAction Constructor
 
@@ -112,7 +114,6 @@ public class OpenFileAction extends AbstractAction {
     public void actionPerformed(ActionEvent ae) {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
         javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
-        JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Open File");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);

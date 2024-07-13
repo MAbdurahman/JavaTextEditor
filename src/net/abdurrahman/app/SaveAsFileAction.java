@@ -12,6 +12,7 @@ import java.io.IOException;
 public class SaveAsFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    JFileChooser fileChooser;
     String fileName;
     String filePath;
 
@@ -24,6 +25,7 @@ public class SaveAsFileAction extends AbstractAction {
         super("SaveAs...", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.fileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the SaveAsFileAction Constructor
 
@@ -34,8 +36,7 @@ public class SaveAsFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        JFrame parent = new JFrame();
-        parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Save As...");
@@ -48,7 +49,7 @@ public class SaveAsFileAction extends AbstractAction {
 
         String file = javaTextEditor.getTitle();
         jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
-        int userSelection = jFileChooser.showSaveDialog(parent);
+        int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();
@@ -88,7 +89,7 @@ public class SaveAsFileAction extends AbstractAction {
 
     }//end of removeExtraCharacters Method
 
-    public static void saveAsFileActionDialog () {
+    public static void saveAsFileActionDialog (JavaTextEditor javaTextEditor) {
 
     }//end of saveAsFileActionDialog Method
 

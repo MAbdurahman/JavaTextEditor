@@ -29,7 +29,7 @@ public class JavaTextEditor extends JFrame {
     /** Instance Variables */
     private StyledDocument styledDocument;
     public static JTextPane TEXTPANE;
-    public static RTFEditorKit RTF_EDITOR;
+    public static JFileChooser FILE_CHOOSER;
 
     public static Container CONTAINER;
 
@@ -105,7 +105,7 @@ public class JavaTextEditor extends JFrame {
     protected OpenFileAction openFileAction;
 
     /** SaveFileAction and SaveAsFileAction */
-    protected SaveFileAction saveFileAction;
+    protected static SaveFileAction saveFileAction;
     protected SaveAsFileAction saveAsFileAction;
 
     /** PageSetupAction, PrintPageAction, PrintPreviewAction */
@@ -123,27 +123,17 @@ public class JavaTextEditor extends JFrame {
      */
     public JavaTextEditor() {
         super();
-
         initComponents();
 
-        this.addWindowListener(new WindowAdapter() {
-            /**
-             * windowClosing Method - Closes the frame for the NotePad
-             * @param we - the WindowEvent of closing the frame
-             */
-            @Override
-            public void windowClosing(WindowEvent we) {
-                System.exit(0);
-
-            }//end of the windowClosing Method for the Anonymous WindowAdapter
-        });//end of the Anonymous WindowAdapter Class
     }// end of default JavaTextEditor Constructor
 
-
+    /**
+     * initComponents Method - initialize components for default JavaTextEditor Constructor
+     */
     private void initComponents() {
         this.setVisible(true);
         this.setTitle("Untitled.txt - TextEditor");
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setMinimumSize(new Dimension((int) (screenSize.width / 4), (int) (screenSize.height / 4)));
@@ -224,6 +214,8 @@ public class JavaTextEditor extends JFrame {
         CONTAINER = this.getContentPane();
         CONTAINER.setLayout(new BorderLayout());
         CONTAINER.add(TEXTPANE, BorderLayout.CENTER);
+
+        FILE_CHOOSER = getJFileChooser();
 
         /*this.add(TEXTPANE);*/
         JScrollPane scrollPane = new JScrollPane(TEXTPANE);
@@ -638,10 +630,12 @@ public class JavaTextEditor extends JFrame {
 
     }//end of the getTextPane Method
 
-    public static RTFEditorKit getRTFEditor() {
-        return RTF_EDITOR;
-
-    }//end of getRTFEditorKit Method
+    public static JFileChooser getJFileChooser() {
+        if (FILE_CHOOSER == null) {
+            FILE_CHOOSER = new JFileChooser();
+        }
+        return FILE_CHOOSER;
+    }//end of getJFileChooser Method
 
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String

@@ -2,7 +2,6 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.FileChooserUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
@@ -12,15 +11,17 @@ import java.io.IOException;
 
 /**
  * SaveFileAction Class
+ *
  * @author MAbdurrahman
- * @date 26 June 2024
  * @version 1.0.0
+ * @date 26 June 2024
  */
 public class SaveFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    JFileChooser jFileChooser;
     String fileName;
-    String filePath;
+    static String filePath;
 
     /**
      * SaveFileAction Constructor -
@@ -31,8 +32,81 @@ public class SaveFileAction extends AbstractAction {
         super("Save", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.jFileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the SaveFileAction Constructor
+
+    public static void saveFileActionDialog(JavaTextEditor javaTextEditor, JFileChooser jFileChooser) {
+        System.out.println("Saving file...with saveFileActionDialog");
+        jFileChooser = JavaTextEditor.FILE_CHOOSER;
+        String file = javaTextEditor.getTitle();
+        File selectedFile = jFileChooser.getSelectedFile();
+        if (selectedFile != null) {
+            filePath = selectedFile.getAbsolutePath();
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(JavaTextEditor.TEXTPANE.getText());
+            bufferedWriter.close();
+
+        } catch (NullPointerException ex) {
+            String message = "Error saving file: " + JavaTextEditor.removeExtraCharacters(file) + "\nError: NullPointerException.";
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            String message = "Error saving file: " + JavaTextEditor.removeExtraCharacters(file) + "\nError: IOException.";
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            String message = "Error saving file: " + JavaTextEditor.removeExtraCharacters(file) + "\nError: " + ex.getMessage();
+            JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+
+    }//end of saveFileActionDialog Method
+
+    public static void showConfirmSaveDialog(JavaTextEditor javaTextEditor, JFileChooser jFileChooser) {
+        String file = javaTextEditor.getTitle();
+        String fileName = JavaTextEditor.removeExtraCharacters(file);
+        jFileChooser = JavaTextEditor.FILE_CHOOSER;
+        String message = "Do you want to save the changes to " + fileName + "?";
+        int userResponse = JOptionPane.showConfirmDialog(javaTextEditor, message, "Save File", JOptionPane.YES_NO_CANCEL_OPTION);
+        switch (userResponse) {
+            case JOptionPane.YES_OPTION:
+                saveFileActionDialog(javaTextEditor, jFileChooser );
+                showConfirmSaveMessageYesDialog(javaTextEditor);
+                break;
+            case JOptionPane.NO_OPTION:
+                showConfirmSaveMessageNoDialog(javaTextEditor);
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                showConfirmSaveMessageCancelDialog(javaTextEditor);
+                break;
+        }
+    }//end of showConfirmSaveDialog Method
+
+    public static void showConfirmSaveMessageYesDialog(JavaTextEditor javaTextEditor) {
+        String file = javaTextEditor.getTitle();
+        String fileName = JavaTextEditor.removeExtraCharacters(file);
+        String message = "The changes to " + fileName + " were saved.";
+        JOptionPane.showMessageDialog(javaTextEditor, message, "Save File", JOptionPane.INFORMATION_MESSAGE);
+    }//end of showConfirmSaveMessageYesDialog Method
+
+    public static void showConfirmSaveMessageNoDialog(JavaTextEditor javaTextEditor) {
+        String file = javaTextEditor.getTitle();
+        String fileName = JavaTextEditor.removeExtraCharacters(file);
+        String message = "The changes to " + fileName + " were not saved.";
+        JOptionPane.showMessageDialog(javaTextEditor, message, "Save File", JOptionPane.INFORMATION_MESSAGE);
+    }//end of showConfirmSaveMessageNoDialog Method
+
+    public static void showConfirmSaveMessageCancelDialog(JavaTextEditor javaTextEditor) {
+        String file = javaTextEditor.getTitle();
+        String fileName = JavaTextEditor.removeExtraCharacters(file);
+        String message = "The changes to " + fileName + " were cancelled.";
+        JOptionPane.showMessageDialog(javaTextEditor, message, "Save File", JOptionPane.INFORMATION_MESSAGE);
+    }//end of showConfirmSaveMessageCancelDialog Method
 
     /**
      * actionPerformed Method -
@@ -41,10 +115,9 @@ public class SaveFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        /*JFrame parent = new JFrame();*/
         javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
-        JFileChooser jFileChooser = new JFileChooser();
+        /*jFileChooser = new JFileChooser();*/
         jFileChooser.setDialogTitle("Save");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
@@ -64,29 +137,13 @@ public class SaveFileAction extends AbstractAction {
             filePath = selectedFile.getAbsolutePath();
             javaTextEditor.setTitle(fileName + " - TextEditor");
 
-            try {
-                FileWriter fileWriter = new FileWriter(filePath);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                bufferedWriter.write(JavaTextEditor.TEXTPANE.getText());
-                bufferedWriter.close();
-
-            } catch (NullPointerException ex) {
-                String message = "Error saving file: " + removeExtraCharacters(file) + "\nError: NullPointerException.";
-                JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                String message = "Error saving file: " + removeExtraCharacters(file) + "\nError: IOException.";
-                JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                String message = "Error saving file: " + removeExtraCharacters(file) + "\nError: " + ex.getMessage();
-                JOptionPane.showMessageDialog(javaTextEditor, message, "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-            }
         }
+
     }//end of actionPerformed Method
+
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String
+     *
      * @param text - the specified String
      * @return String - a String with the last thirteen characters removed
      */
@@ -95,15 +152,4 @@ public class SaveFileAction extends AbstractAction {
 
     }//end of removeExtraCharacters Method
 
-    public static void saveFileActionDialog () {
-
-    }//end of saveFileActionDialog Method
-
-    public static void showConfirmSaveDialog () {
-
-    }//end of showConfirmSaveDialog Method
-
-    public static void showConfirmSaveMessageDialog () {
-
-    }//end of showConfirmSaveMessageDialog Method
 }//end of SaveFileAction Class

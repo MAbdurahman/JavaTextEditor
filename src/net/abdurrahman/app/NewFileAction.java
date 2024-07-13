@@ -18,6 +18,7 @@ import java.io.IOException;
 public class NewFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    JFileChooser fileChooser;
     String fileName;
     String filePath;
     /**
@@ -29,6 +30,7 @@ public class NewFileAction extends AbstractAction {
         super("New", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.fileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the NewFileAction Constructor
 
@@ -39,14 +41,18 @@ public class NewFileAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         String fileName = javaTextEditor.getTitle();
-        if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != "") {
+        /*if (JavaTextEditor.HAS_CHANGED ) {
             showDialog();
 
-        } else if (fileName.equalsIgnoreCase("Untitled - TextEditor")) {
-            showSaveAsDialog();
+        }*/
+        if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != ""  && fileName.equalsIgnoreCase("Untitled.txt - TextEditor")) {
+
+
+            /*showSaveAsDialog();*/
+            System.out.println("showing save as " + fileName);
 
         } else {
-
+            System.out.println("creating new file");
         }
     }//end of actionPerformed Method
 
@@ -61,21 +67,21 @@ public class NewFileAction extends AbstractAction {
     private void showSaveAsDialog() {
         System.out.println("showSaveAsDialog");
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        JFrame parent = new JFrame();
-        parent.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+        /*JFrame parent = new JFrame();*/
+        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Save As...");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
-        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.rtf, *.txt)";
+        String filterFiles = "Text files (*.cpp, *.css, *.html, *.htm, *.java, *.js, *.php, *.scss, *.txt)";
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter(filterFiles,
-                "cpp", "css", "html", "htm", "java", "js", "rtf", "txt");
+                "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         String file = javaTextEditor.getTitle();
         jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
-        int userSelection = jFileChooser.showSaveDialog(parent);
+        int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jFileChooser.getSelectedFile();
