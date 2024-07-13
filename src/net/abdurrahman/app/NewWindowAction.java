@@ -27,14 +27,7 @@ public class NewWindowAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (JavaTextEditor.TEXTPANE.getText().isEmpty()) {
-            System.out.println("Text is empty");
-           new JavaTextEditor();
-
-
-        } else {
-            JavaTextEditor.saveFileAction.showConfirmSaveDialog(javaTextEditor, fileChooser);
-        }
+        new JavaTextEditor();
 
     }//end of actionPerformed Method
 }//end of NewWindowAction Class
