@@ -49,9 +49,9 @@ public class JavaTextEditor extends JFrame {
 
     /** MenuItems for the fileMenu */
     private static JMenuItem newFileItem, newWindowItem, openFileItem, saveFileItem, saveAsFileItem;
-    private JMenuItem pageSetupItem, printPageItem, printPreviewItem;
+    private JMenuItem pageSetupItem, printPageItem;
     private JMenuItem exitItem;
-    private JMenu printerMenu;
+    /*private JMenu printerMenu;*/
 
     protected static boolean HAS_CHANGED;
     protected static boolean HAS_LINE_NUMBERS;
@@ -111,7 +111,7 @@ public class JavaTextEditor extends JFrame {
     /** PageSetupAction, PrintPageAction, PrintPreviewAction */
     protected PageSetupAction pageSetupAction;
     protected PrintPageAction printPageAction;
-    protected PrintPreviewAction printPreviewAction;
+    /*protected PrintPreviewAction printPreviewAction;*/
     protected ExitAction exitAction;
 
     /** ViewMenu and its menuItems Abstract Actions */
@@ -363,19 +363,19 @@ public class JavaTextEditor extends JFrame {
         pageSetupAction  = new PageSetupAction(pageSetupIcon, this);
         pageSetupItem = new JMenuItem(pageSetupAction);
 
-        printerMenu = new JMenu("Printer...");
-        printerMenu.setIcon(printerIcon);
+        /*printerMenu = new JMenu("Printer...");
+        printerMenu.setIcon(printerIcon);*/
 
         printPageAction  = new PrintPageAction(printIcon, this);
         printPageItem = new JMenuItem(printPageAction);
 
-        printPreviewAction = new PrintPreviewAction(printPreviewIcon, this);
-        printPreviewItem = new JMenuItem(printPreviewAction);
+        /*printPreviewAction = new PrintPreviewAction(printPreviewIcon, this);
+        printPreviewItem = new JMenuItem(printPreviewAction);*/
 
         exitAction  = new ExitAction(exitIcon, this);
         exitItem = new JMenuItem(exitAction);
 
-        printerMenu.setFont(menuItemFont);
+        /*printerMenu.setFont(menuItemFont);*/
         newFileItem.setFont(menuItemFont);
         newWindowItem.setFont(menuItemFont);
         openFileItem.setFont(menuItemFont);
@@ -383,7 +383,7 @@ public class JavaTextEditor extends JFrame {
         saveAsFileItem.setFont(menuItemFont);
         pageSetupItem.setFont(menuItemFont);
         printPageItem.setFont(menuItemFont);
-        printPreviewItem.setFont(menuItemFont);
+        /*printPreviewItem.setFont(menuItemFont);*/
         exitItem.setFont(menuItemFont);
 
         /** Shortcut KeyStrokes for JMenuItems for the fileMenu */
@@ -397,17 +397,18 @@ public class JavaTextEditor extends JFrame {
         /************************* fileMenu and add its menuItems *************************/
         fileMenu.add(newFileItem);
         fileMenu.add(newWindowItem);
-        fileMenu.add(openFileItem);
         fileMenu.addSeparator();
+        fileMenu.add(openFileItem);
         fileMenu.add(saveFileItem);
         fileMenu.add(saveAsFileItem);
         fileMenu.addSeparator();
         fileMenu.add(pageSetupItem);
-        fileMenu.add(printerMenu);
+        fileMenu.add(printPageItem);
+        /*fileMenu.add(printerMenu);*/
         fileMenu.addSeparator();
-        printerMenu.add(printPageItem);
+/*        printerMenu.add(printPageItem);
         printerMenu.addSeparator();
-        printerMenu.add(printPreviewItem);
+        printerMenu.add(printPreviewItem);*/
         fileMenu.add(exitItem);
 
         /************************* editMenu and add its menuItems *************************/
@@ -613,7 +614,7 @@ public class JavaTextEditor extends JFrame {
         helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.CTRL_MASK));
         helpItem.addActionListener(new HelpDialog(this, "View Help", true));
         aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.CTRL_MASK));
-        aboutItem.addActionListener(new AboutDialog(this, "About Editor", true));
+        aboutItem.addActionListener(new AboutDialog(this, "About TextEditor", true));
 
         helpMenu.add(helpItem);
         helpMenu.addSeparator();

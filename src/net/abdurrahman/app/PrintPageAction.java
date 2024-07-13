@@ -22,7 +22,7 @@ public class PrintPageAction extends AbstractAction {
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public PrintPageAction(ImageIcon icon, JavaTextEditor javaTextEditor) {
-        super("Print", icon);
+        super("Print...", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
 
