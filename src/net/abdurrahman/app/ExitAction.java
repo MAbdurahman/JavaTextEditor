@@ -44,7 +44,9 @@ public class ExitAction extends AbstractAction {
 
     }//end of disposeJavaTextEditor Method
 
-
+    /**
+     * showDialog Method -
+     */
     private void showDialog() {
         String file = javaTextEditor.getTitle();
         Object[] options = {"Save", "Don't Save", "Cancel"};
@@ -59,6 +61,9 @@ public class ExitAction extends AbstractAction {
         }
     }//end of showDialog Method
 
+    /**
+     * showSaveAsDialog Method -
+     */
     private void showSaveAsDialog() {
         System.out.println("showSaveAsDialog");
         /* Assign ImageIcon to parent and later assign to JFileChooser */
