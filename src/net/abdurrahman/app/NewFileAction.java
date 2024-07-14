@@ -18,7 +18,7 @@ import java.io.IOException;
 public class NewFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
-    JFileChooser fileChooser;
+    JFileChooser jFileChooser;
     String fileName;
     String filePath;
     /**
@@ -30,7 +30,7 @@ public class NewFileAction extends AbstractAction {
         super("New", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
-        this.fileChooser = JavaTextEditor.FILE_CHOOSER;
+        this.jFileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the NewFileAction Constructor
 
@@ -45,10 +45,8 @@ public class NewFileAction extends AbstractAction {
 
         if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != ""  && fileName.equalsIgnoreCase("Untitled.txt")) {
 
-
-            /*showSaveAsDialog();*/
             System.out.println("showing save as " + fileName);
-            showSaveAsDialog();
+            showDialog();
 
         } else {
             System.out.println("creating new file");
@@ -62,15 +60,19 @@ public class NewFileAction extends AbstractAction {
         int result = JOptionPane.showOptionDialog(javaTextEditor, "Do you want to save changes to "+removeExtraCharacters(file)+"?",
                 "TextEditor", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 
+        if (result == JOptionPane.YES_OPTION) {
+            showSaveAsDialog();
+        }
+        if (result == JOptionPane.NO_OPTION) {
+            createNewFile();
+        }
     }//end of showDialog Method
 
     private void showSaveAsDialog() {
         System.out.println("showSaveAsDialog");
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        /*JFrame parent = new JFrame();*/
         javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
-        JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Save As...");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
@@ -80,8 +82,8 @@ public class NewFileAction extends AbstractAction {
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
         /*String file = javaTextEditor.getTitle();*/
-        String file = "*.txt";
-        jFileChooser.setSelectedFile(new File(file));
+        String file = javaTextEditor.getTitle();
+        jFileChooser.setSelectedFile(new File(JavaTextEditor.removeExtraCharacters(file)));
         int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
