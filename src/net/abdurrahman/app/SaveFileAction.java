@@ -36,9 +36,9 @@ public class SaveFileAction extends AbstractAction {
 
     }//end of the SaveFileAction Constructor
 
-    public static void saveFileActionDialog(JavaTextEditor javaTextEditor, JFileChooser jFileChooser) {
+    public static void saveFileActionDialog(JavaTextEditor javaTextEditor) {
         System.out.println("Saving file...with saveFileActionDialog");
-        jFileChooser = JavaTextEditor.FILE_CHOOSER;
+        JFileChooser jFileChooser = JavaTextEditor.FILE_CHOOSER;
         String file = javaTextEditor.getTitle();
         File selectedFile = jFileChooser.getSelectedFile();
         if (selectedFile != null) {
@@ -75,7 +75,7 @@ public class SaveFileAction extends AbstractAction {
         int userResponse = JOptionPane.showConfirmDialog(javaTextEditor, message, "Save File", JOptionPane.YES_NO_CANCEL_OPTION);
         switch (userResponse) {
             case JOptionPane.YES_OPTION:
-                saveFileActionDialog(javaTextEditor, jFileChooser );
+                saveFileActionDialog(javaTextEditor);
                 showConfirmSaveMessageYesDialog(javaTextEditor);
                 break;
             case JOptionPane.NO_OPTION:

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SaveAsFileAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
-    JFileChooser fileChooser;
+    JFileChooser jFileChooser;
     String fileName;
     String filePath;
 
@@ -25,7 +25,7 @@ public class SaveAsFileAction extends AbstractAction {
         super("SaveAs...", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
-        this.fileChooser = JavaTextEditor.FILE_CHOOSER;
+        this.jFileChooser = JavaTextEditor.FILE_CHOOSER;
 
     }//end of the SaveAsFileAction Constructor
 
@@ -38,7 +38,6 @@ public class SaveAsFileAction extends AbstractAction {
         /* Assign ImageIcon to parent and later assign to JFileChooser */
         javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
 
-        JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Save As...");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setAcceptAllFileFilterUsed(false);
@@ -47,8 +46,9 @@ public class SaveAsFileAction extends AbstractAction {
                 "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        String file = javaTextEditor.getTitle();
-        jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
+        /*String file = javaTextEditor.getTitle();*/
+        String file = "*.txt";
+        jFileChooser.setSelectedFile(new File(file));
         int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {

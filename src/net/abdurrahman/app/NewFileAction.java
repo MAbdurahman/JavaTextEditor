@@ -40,19 +40,19 @@ public class NewFileAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        String fileName = javaTextEditor.getTitle();
-        /*if (JavaTextEditor.HAS_CHANGED ) {
-            showDialog();
+        String file = javaTextEditor.getTitle();
+        String fileName = JavaTextEditor.removeExtraCharacters(file);
 
-        }*/
-        if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != ""  && fileName.equalsIgnoreCase("Untitled.txt - TextEditor")) {
+        if (JavaTextEditor.HAS_CHANGED && JavaTextEditor.TEXTPANE.getText() != ""  && fileName.equalsIgnoreCase("Untitled.txt")) {
 
 
             /*showSaveAsDialog();*/
             System.out.println("showing save as " + fileName);
+            showSaveAsDialog();
 
         } else {
             System.out.println("creating new file");
+            createNewFile();
         }
     }//end of actionPerformed Method
 
@@ -79,8 +79,9 @@ public class NewFileAction extends AbstractAction {
                 "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        String file = javaTextEditor.getTitle();
-        jFileChooser.setSelectedFile(new File(removeExtraCharacters(file)));
+        /*String file = javaTextEditor.getTitle();*/
+        String file = "*.txt";
+        jFileChooser.setSelectedFile(new File(file));
         int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -109,7 +110,7 @@ public class NewFileAction extends AbstractAction {
                 ex.printStackTrace();
             }
         }
-    }
+    }//end of showSaveAsDialog Method
 
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String
@@ -120,4 +121,14 @@ public class NewFileAction extends AbstractAction {
         return text.substring(0, text.length() - 13);
 
     }//end of removeExtraCharacters Method
+
+    /**
+     * createNewFile Method -
+     */
+    private void createNewFile () {
+        JavaTextEditor.TEXTPANE.setText("");
+        JavaTextEditor.HAS_CHANGED = false;
+        JavaTextEditor.TEXTPANE.requestFocus();
+        javaTextEditor.setTitle("Untitled.txt - TextEditor");
+    }//end of createNewFile Method
 }//end of NewFileAction Class
