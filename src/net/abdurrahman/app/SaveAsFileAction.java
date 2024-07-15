@@ -15,6 +15,7 @@ public class SaveAsFileAction extends AbstractAction {
     JFileChooser jFileChooser;
     String fileName;
     String filePath;
+    String file;
 
     /**
      * SaveAsFileAction Constructor -
@@ -46,9 +47,15 @@ public class SaveAsFileAction extends AbstractAction {
                 "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        /*String file = javaTextEditor.getTitle();*/
-        String file = "*.txt";
+        if (javaTextEditor.getTitle().equals("Untitled.txt - TextEditor")) {
+            file = "*.txt";
+
+        } else {
+            file = JavaTextEditor.removeExtraCharacters(javaTextEditor.getTitle());
+
+        }
         jFileChooser.setSelectedFile(new File(file));
+
         int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {

@@ -107,7 +107,6 @@ public class OpenFileAction extends AbstractAction {
 
     /**
      * actionPerformed Method -
-     *
      * @param ae the ActionEvent to be processed
      */
     @Override
@@ -128,7 +127,6 @@ public class OpenFileAction extends AbstractAction {
             File openedFile = jFileChooser.getSelectedFile();
             String openedFileName = openedFile.getName();
             javaTextEditor.setTitle(openedFileName + " - TextEditor");
-            System.out.println(openedFileName);
 
             openFileActionDialog(openedFile, javaTextEditor);
         }
