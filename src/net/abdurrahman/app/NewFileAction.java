@@ -21,6 +21,7 @@ public class NewFileAction extends AbstractAction {
     JFileChooser jFileChooser;
     String fileName;
     String filePath;
+    String file;
     /**
      * NewFileAction Constructor -
      * @param icon - the ImageIcon
@@ -81,9 +82,15 @@ public class NewFileAction extends AbstractAction {
                 "cpp", "css", "html", "htm", "java", "js", "php", "scss", "txt");
         jFileChooser.addChoosableFileFilter(fileNameExtensionFilter);
 
-        /*String file = javaTextEditor.getTitle();*/
-        String file = javaTextEditor.getTitle();
-        jFileChooser.setSelectedFile(new File(JavaTextEditor.removeExtraCharacters(file)));
+        if (javaTextEditor.getTitle().equals("Untitled.txt - TextEditor")) {
+            file = "*.txt";
+
+        } else {
+            file = JavaTextEditor.removeExtraCharacters(javaTextEditor.getTitle());
+
+        }
+        jFileChooser.setSelectedFile(new File(file));
+
         int userSelection = jFileChooser.showSaveDialog(javaTextEditor);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
