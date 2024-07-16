@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class ExitAction extends AbstractAction {
     //Instance variables
-    JavaTextEditor javaTextEditor;
-    JFileChooser jFileChooser;
-    String fileName;
+    static JavaTextEditor javaTextEditor;
+    static JFileChooser jFileChooser;
+    static String fileName;
     static String filePath;
     /**
      * ExitAction Constructor -
@@ -39,7 +39,7 @@ public class ExitAction extends AbstractAction {
 
     }//end of actionPerformed Method
 
-    private void disposeJavaTextEditor() {
+    public static void disposeJavaTextEditor() {
         javaTextEditor.dispose();
 
     }//end of disposeJavaTextEditor Method
@@ -47,7 +47,7 @@ public class ExitAction extends AbstractAction {
     /**
      * showDialog Method -
      */
-    private void showDialog() {
+    public static void showDialog() {
         String file = javaTextEditor.getTitle();
         Object[] options = {"Save", "Don't Save", "Cancel"};
         int result = JOptionPane.showOptionDialog(javaTextEditor, "Do you want to save changes to "+JavaTextEditor.removeExtraCharacters(file)+"?",
@@ -59,15 +59,18 @@ public class ExitAction extends AbstractAction {
         if (result == JOptionPane.NO_OPTION) {
             disposeJavaTextEditor();
         }
+        if (result == JOptionPane.CANCEL_OPTION) {
+            javaTextEditor.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
     }//end of showDialog Method
 
     /**
      * showSaveAsDialog Method -
      */
-    private void showSaveAsDialog() {
+    public static void showSaveAsDialog() {
         System.out.println("showSaveAsDialog");
         /* Assign ImageIcon to parent and later assign to JFileChooser */
-        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/java-texteditor.png")));
+        javaTextEditor.setIconImage(Toolkit.getDefaultToolkit().getImage(ExitAction.class.getResource("../img/java-texteditor.png")));
 
         jFileChooser.setDialogTitle("Save As...");
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);

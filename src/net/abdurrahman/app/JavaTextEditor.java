@@ -31,6 +31,7 @@ public class JavaTextEditor extends JFrame {
     public static JTextPane TEXTPANE;
     public static JFileChooser FILE_CHOOSER;
 
+
     public static Container CONTAINER;
 
     private File currentFile;
@@ -145,6 +146,27 @@ public class JavaTextEditor extends JFrame {
                 (screenSize.height / 2) - (height / 2));
 
 
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                if (JavaTextEditor.TEXTPANE.getText() == "") {
+                    ExitAction.disposeJavaTextEditor();
+
+                } else if (JavaTextEditor.HAS_CHANGED) {
+                    ExitAction.showDialog();
+                }
+            }//end of windowClosing Method
+        });
+
+
+        /*this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+
+                SaveFileAction.showConfirmSaveDialog(JAVA_TEXT_EDITOR, FILE_CHOOSER);
+            }
+        });*/
+
+
         /** The following two lines of code creates and sets a new icon for the frame */
         Image icon = Toolkit.getDefaultToolkit().getImage(JavaTextEditor.class.getResource("../img/java-texteditor.png"));
         setIconImage(icon);
@@ -160,7 +182,7 @@ public class JavaTextEditor extends JFrame {
             String message = ex.getMessage();
             JOptionPane.showConfirmDialog(rootPane, message);
         }
-        javax.swing.UIManager.put("OptionPane.font", new Font("Lucida Console", Font.BOLD, 14));
+        UIManager.put("OptionPane.font", new Font("Lucida Console", Font.BOLD, 14));
 
         /** ImageIcon for the JMenus and JMenuItems */
         ImageIcon aboutIcon = new ImageIcon(getClass().getResource("../img/about.png"));
@@ -621,6 +643,7 @@ public class JavaTextEditor extends JFrame {
         helpMenu.add(aboutItem);
 
     }//end of initComponents Method
+
 
     /**
      * getTextPane Method -
