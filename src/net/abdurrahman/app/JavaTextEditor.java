@@ -33,10 +33,14 @@ public class JavaTextEditor extends JFrame {
 
 
     public static Container CONTAINER;
+    public static int LINE_NUMBER;
+    public static int COLUMN_NUMBER;
 
     private File currentFile;
     private PrinterJob printJob;
     private PageFormat pageFormat;
+
+
     private final Font menuFont = new Font("Lucida Console", Font.BOLD, 14);
     private final Font menuItemFont = new Font("Lucida Console", Font.PLAIN, 14);
     private final Font optionPaneFont = new Font("Lucida Console", Font.BOLD, 14);
@@ -57,6 +61,7 @@ public class JavaTextEditor extends JFrame {
     protected static boolean HAS_CHANGED;
     protected static boolean HAS_LINE_NUMBERS;
     protected static boolean HAS_STATUS_BAR;
+
 
     /** MenuItems for the editMenu */
     static JMenuItem undoItem, redoItem;
@@ -157,15 +162,6 @@ public class JavaTextEditor extends JFrame {
                 }
             }//end of windowClosing Method
         });
-
-
-        /*this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent we) {
-
-                SaveFileAction.showConfirmSaveDialog(JAVA_TEXT_EDITOR, FILE_CHOOSER);
-            }
-        });*/
-
 
         /** The following two lines of code creates and sets a new icon for the frame */
         Image icon = Toolkit.getDefaultToolkit().getImage(JavaTextEditor.class.getResource("../img/java-texteditor.png"));
@@ -338,9 +334,37 @@ public class JavaTextEditor extends JFrame {
              */
             @Override
             public void caretUpdate(CaretEvent ce) {
+                TEXTPANE = (JTextPane) ce.getSource();
                 TEXTPANE.getCaretPosition();
 
+                LINE_NUMBER = 1;
+                COLUMN_NUMBER = 1;
+
+                int caretPosition = TEXTPANE.getCaretPosition();
+                /*System.out.println(caretPosition);
+                System.out.println(LINE_NUMBER);*/
+
+                Point point = TEXTPANE.getCaret().getMagicCaretPosition();
+                System.out.println(point);
+
+                /*StyledDocument document = (StyledDocument)TEXTPANE.getDocument();
+                LINE_NUMBER = document.getRootElements()[0].getElementIndex(caretPosition) + 1*/;
+                /*LINE_NUMBER = (int) point.getY();
+                COLUMN_NUMBER = (int) point.getX();*/
+
+                /*COLUMN_NUMBER = document.getRootElements()[1].getElementIndex(caretPosition) + 1;*//*
+                COLUMN_NUMBER = caretPosition - document.getRootElements()[0].getEndOffset() + 1;*/
+                /*System.out.println("line: "+LINE_NUMBER);
+                System.out.println("column: "+COLUMN_NUMBER);*/
+
+
+                StatusBarAction.updateStatusBar(StatusBarAction.LINE_NUMBER, StatusBarAction.COLUMN_NUMBER);
+
+
             }//end of the caretUpdate Method
+            public static void updateStatusBar(int lineNumber, int columnNumber) {
+                StatusBarAction.statusBarLabel.setText(lineNumber + ":" + columnNumber);
+            }
         });//end of the Anonymous Caret Listener
 
         /************************* create menubar and its attributes *************************/
@@ -660,6 +684,12 @@ public class JavaTextEditor extends JFrame {
         }
         return FILE_CHOOSER;
     }//end of getJFileChooser Method
+
+    public static Container getContainer() {
+        return CONTAINER;
+
+    }//end of getContainer Method
+
 
     /**
      * removeExtraCharacters Method - removes the last thirteen characters from a String
