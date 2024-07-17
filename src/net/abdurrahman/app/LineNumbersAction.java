@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 public class LineNumbersAction extends AbstractAction {
     //Instance variables
     JavaTextEditor javaTextEditor;
+    LineNumbers lineNumbers;
 
 
     /**
@@ -23,6 +24,7 @@ public class LineNumbersAction extends AbstractAction {
         super("Line Numbers", icon);
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
+        this.lineNumbers = new LineNumbers(javaTextEditor);
 
     }//end of the LineNumbersAction Constructor
 
@@ -31,5 +33,14 @@ public class LineNumbersAction extends AbstractAction {
      * @param ae the event to be processed
      */
     @Override
-    public void actionPerformed(ActionEvent ae) {}//end of actionPerformed Method
+    public void actionPerformed(ActionEvent ae) {
+        JavaTextEditor.HAS_LINE_NUMBERS = !JavaTextEditor.HAS_LINE_NUMBERS;
+        if (JavaTextEditor.HAS_LINE_NUMBERS) {
+            System.out.println("Line numbers visible");
+
+        } else {
+            System.out.println("Line numbers invisible");
+        }
+
+    }//end of actionPerformed Method
 }//end of LineNumbersAction Class
