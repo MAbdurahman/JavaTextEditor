@@ -2,10 +2,7 @@ package net.abdurrahman.app;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.EditorKit;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.StyledEditorKit;
+import javax.swing.text.*;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.rtf.RTFEditorKit;
 import javax.swing.undo.CannotRedoException;
@@ -149,8 +146,6 @@ public class JavaTextEditor extends JFrame {
         this.setSize(width, height);
         this.setLocation((screenSize.width / 2) - (width / 2),
                 (screenSize.height / 2) - (height / 2));
-
-
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -310,7 +305,6 @@ public class JavaTextEditor extends JFrame {
                 TEXTPANE.getDocument().getLength();
                 HAS_CHANGED = true;
 
-
             }//end of the removeUpdate Method
             /**
              * insertUpdate Method -
@@ -321,7 +315,6 @@ public class JavaTextEditor extends JFrame {
                 de.getDocument().getLength();
                 TEXTPANE.getDocument().getLength();
                 HAS_CHANGED = true;
-
 
             }//end of the insertUpdate Method
         });//end of the Anonymous DocumentListener
@@ -337,34 +330,12 @@ public class JavaTextEditor extends JFrame {
                 TEXTPANE = (JTextPane) ce.getSource();
                 TEXTPANE.getCaretPosition();
 
-                LINE_NUMBER = 1;
-                COLUMN_NUMBER = 1;
+                LINE_NUMBER = StatusBarAction.getLineNumber();
+                COLUMN_NUMBER = StatusBarAction.getColumnNumber();
 
-                int caretPosition = TEXTPANE.getCaretPosition();
-                /*System.out.println(caretPosition);
-                System.out.println(LINE_NUMBER);*/
-
-                Point point = TEXTPANE.getCaret().getMagicCaretPosition();
-                System.out.println(point);
-
-                /*StyledDocument document = (StyledDocument)TEXTPANE.getDocument();
-                LINE_NUMBER = document.getRootElements()[0].getElementIndex(caretPosition) + 1*/;
-                /*LINE_NUMBER = (int) point.getY();
-                COLUMN_NUMBER = (int) point.getX();*/
-
-                /*COLUMN_NUMBER = document.getRootElements()[1].getElementIndex(caretPosition) + 1;*//*
-                COLUMN_NUMBER = caretPosition - document.getRootElements()[0].getEndOffset() + 1;*/
-                /*System.out.println("line: "+LINE_NUMBER);
-                System.out.println("column: "+COLUMN_NUMBER);*/
-
-
-                StatusBarAction.updateStatusBar(StatusBarAction.LINE_NUMBER, StatusBarAction.COLUMN_NUMBER);
-
+                StatusBarAction.updateStatusBar(LINE_NUMBER, COLUMN_NUMBER);
 
             }//end of the caretUpdate Method
-            public static void updateStatusBar(int lineNumber, int columnNumber) {
-                StatusBarAction.statusBarLabel.setText(lineNumber + ":" + columnNumber);
-            }
         });//end of the Anonymous Caret Listener
 
         /************************* create menubar and its attributes *************************/

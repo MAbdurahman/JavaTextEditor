@@ -6,6 +6,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -21,6 +23,8 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
     JTextArea editArea;
     JPanel statusBarPanel;
     static JLabel statusBarLabel;
+    static JLabel CRLFLabel;
+    static JLabel UTF8Label;
 
     protected static int LINE_NUMBER;
     protected static int COLUMN_NUMBER;
@@ -37,8 +41,15 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
         this.javaTextEditor = javaTextEditor;
         this.statusBarPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         this.statusBarLabel = new JLabel();
+        statusBarLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.CRLFLabel = new JLabel("Windows (CRLF)    ");
+        CRLFLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.UTF8Label = new JLabel("UTF-8     ");
+        UTF8Label.setAlignmentX(Component.LEFT_ALIGNMENT);
         statusBarPanel.setBorder(new CompoundBorder(new LineBorder(Color.DARK_GRAY), new EtchedBorder()));
         statusBarPanel.add(statusBarLabel);
+        statusBarPanel.add(CRLFLabel);
+        statusBarPanel.add(UTF8Label);
 
         this.container = javaTextEditor.getContainer();
         container.add(statusBarPanel, BorderLayout.SOUTH);
@@ -57,6 +68,7 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
         JavaTextEditor.HAS_STATUS_BAR = !JavaTextEditor.HAS_STATUS_BAR;
         statusBarPanel.setVisible(JavaTextEditor.HAS_STATUS_BAR);
         updateStatusBar(LINE_NUMBER, COLUMN_NUMBER);
+
     }//end of actionPerformed Method
 
 
@@ -79,7 +91,36 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
     }
 
     protected static void updateStatusBar(int lineNumber, int columnNumber) {
-        statusBarLabel.setText("Line: " + lineNumber + ", Column: " + columnNumber);
+        statusBarLabel.setText("Line: " + lineNumber + ", Column: " + columnNumber + "     ");
 
     }//end of updateStatusBar Method
+
+    protected static int getLineNumber() {
+        int caretPosition = JavaTextEditor.TEXTPANE.getCaretPosition();
+        int rowNumber = (caretPosition == 0) ? 1 : 0;
+
+        for (int offset = caretPosition; offset > 0;) {
+            try {
+                offset = Utilities.getRowStart(JavaTextEditor.TEXTPANE, offset) - 1;
+                rowNumber++;
+            } catch (BadLocationException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return rowNumber;
+    }//end of getLineNumber Method
+
+    protected static int getColumnNumber() {
+        int caretPosition = JavaTextEditor.TEXTPANE.getCaretPosition();
+        int columnNumber;
+        try {
+            int offset = Utilities.getRowStart(JavaTextEditor.TEXTPANE, caretPosition);
+            columnNumber = caretPosition - offset + 1;
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        }
+
+        return columnNumber;
+    }
 }//end of StatusBarAction Class
