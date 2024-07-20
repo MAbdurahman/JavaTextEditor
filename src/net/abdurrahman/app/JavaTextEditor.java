@@ -619,8 +619,8 @@ public class JavaTextEditor extends JFrame {
         lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
         statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
 
-        viewMenu.add(lineNumberCheckboxItem);
-        viewMenu.addSeparator();
+        /*viewMenu.add(lineNumberCheckboxItem);*/
+        /*viewMenu.addSeparator();*/
         viewMenu.add(statusBarCheckboxItem);
 
         /************************* helpMenu and its menuItems *************************/
