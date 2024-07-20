@@ -44,6 +44,10 @@ public class ExitAction extends AbstractAction {
 
     }//end of disposeJavaTextEditor Method
 
+    public static void defaultCloseAction() {
+        javaTextEditor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
     /**
      * showDialog Method -
      */

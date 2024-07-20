@@ -1,9 +1,7 @@
 package net.abdurrahman.app;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -25,6 +23,11 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
     static JLabel statusBarLabel;
     static JLabel CRLFLabel;
     static JLabel UTF8Label;
+    static String spaces_13 = "             ";
+    Border leftBorder = BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY);
+
+    JPanel ut8Panel, crlfPanel;
+    JPanel statusPanel;
 
     protected static int LINE_NUMBER;
     protected static int COLUMN_NUMBER;
@@ -40,16 +43,34 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
         setEnabled(true);
         this.javaTextEditor = javaTextEditor;
         this.statusBarPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        this.ut8Panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.crlfPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        ut8Panel.setBorder(leftBorder);
+        crlfPanel.setBorder(leftBorder);
+        statusPanel.setBorder(leftBorder);
+
         this.statusBarLabel = new JLabel();
         statusBarLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.CRLFLabel = new JLabel("Windows (CRLF)    ");
+        this.CRLFLabel = new JLabel("Windows (CRLF)" + spaces_13);
         CRLFLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.UTF8Label = new JLabel("UTF-8     ");
+        this.UTF8Label = new JLabel("UTF-8" + spaces_13);
         UTF8Label.setAlignmentX(Component.LEFT_ALIGNMENT);
-        statusBarPanel.setBorder(new CompoundBorder(new LineBorder(Color.DARK_GRAY), new EtchedBorder()));
-        statusBarPanel.add(statusBarLabel);
+
+        ut8Panel.add(UTF8Label);
+        crlfPanel.add(CRLFLabel);
+        statusPanel.add(statusBarLabel);
+
+
+
+        statusBarPanel.setBorder(new CompoundBorder(new LineBorder(Color.LIGHT_GRAY, 0), new EmptyBorder(0,0,0,0)));
+        /*statusBarPanel.add(statusBarLabel);
         statusBarPanel.add(CRLFLabel);
-        statusBarPanel.add(UTF8Label);
+        statusBarPanel.add(UTF8Label);*/
+
+        statusBarPanel.add(statusPanel);
+        statusBarPanel.add(crlfPanel);
+        statusBarPanel.add(ut8Panel);
 
         this.container = javaTextEditor.getContainer();
         container.add(statusBarPanel, BorderLayout.SOUTH);
@@ -91,7 +112,7 @@ public class StatusBarAction extends AbstractAction implements CaretListener {
     }
 
     protected static void updateStatusBar(int lineNumber, int columnNumber) {
-        statusBarLabel.setText("Line: " + lineNumber + ", Column: " + columnNumber + "     ");
+        statusBarLabel.setText("Line: " + lineNumber + ", Column: " + columnNumber + spaces_13);
 
     }//end of updateStatusBar Method
 

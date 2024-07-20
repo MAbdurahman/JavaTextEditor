@@ -136,7 +136,7 @@ public class JavaTextEditor extends JFrame {
     private void initComponents() {
         this.setVisible(true);
         this.setTitle("Untitled.txt - TextEditor");
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setMinimumSize(new Dimension((int) (screenSize.width / 4), (int) (screenSize.height / 4)));
@@ -154,10 +154,14 @@ public class JavaTextEditor extends JFrame {
 
                 } else if (JavaTextEditor.HAS_CHANGED) {
                     ExitAction.showDialog();
+
+                } else {
+                    ExitAction.defaultCloseAction();
                 }
             }//end of windowClosing Method
         });
 
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         /** The following two lines of code creates and sets a new icon for the frame */
         Image icon = Toolkit.getDefaultToolkit().getImage(JavaTextEditor.class.getResource("../img/java-texteditor.png"));
         setIconImage(icon);
