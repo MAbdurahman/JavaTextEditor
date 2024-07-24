@@ -8,3 +8,5 @@ scss, and .txt. This application not only allows for the creation and storage
 of these text files, but users can manipulate text fonts, colors, and alignments. 
 In addition to allowing basic functions like cut, copy, and paste, users are 
 allowed to find and replace desired specified text. 
+
+![javaTextEditor](https://github.com/user-attachments/assets/062788bd-7155-450e-b625-d75c96b5aec9)
