@@ -3,8 +3,6 @@ package net.abdurrahman.app;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
-import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.rtf.RTFEditorKit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -67,6 +65,9 @@ public class JavaTextEditor extends JFrame {
 
     /** MenuItems for the viewMenu */
     protected JCheckBoxMenuItem lineNumberCheckboxItem;
+
+    protected JMenu zoomMenu;
+    protected JMenuItem zoomInItem, zoomOutItem, zoomDefaultItem;
     protected JCheckBoxMenuItem statusBarCheckboxItem;
 
     /** MenuItems for the formatMenu */
@@ -119,6 +120,10 @@ public class JavaTextEditor extends JFrame {
 
     /** ViewMenu and its menuItems Abstract Actions */
    protected LineNumbersAction lineNumbersAction;
+
+   protected ZoomInAction zoomInAction;
+   protected ZoomOutAction zoomOutAction;
+   protected ZoomDefaultAction zoomDefaultAction;
    protected StatusBarAction statusBarAction;
 
     /**
@@ -146,6 +151,9 @@ public class JavaTextEditor extends JFrame {
         this.setSize(width, height);
         this.setLocation((screenSize.width / 2) - (width / 2),
                 (screenSize.height / 2) - (height / 2));
+
+        centerTheFrame();
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -222,6 +230,9 @@ public class JavaTextEditor extends JFrame {
         ImageIcon superscriptIcon = new ImageIcon(getClass().getResource("../img/superscript.png"));
         ImageIcon underlineIcon = new ImageIcon(getClass().getResource("../img/underline.png"));
         ImageIcon undoIcon = new ImageIcon(getClass().getResource("../img/undo.png"));
+        ImageIcon zoomInIcon = new ImageIcon(getClass().getResource("../img/zoom-in.png"));
+        ImageIcon zoomOutIcon = new ImageIcon(getClass().getResource("../img/zoom-out.png"));
+        ImageIcon zoomNoneIcon = new ImageIcon(getClass().getResource("../img/zoom-none.png"));
 
 
         /************************* JTextPane and attributes *************************/
@@ -234,7 +245,6 @@ public class JavaTextEditor extends JFrame {
 
         FILE_CHOOSER = getJFileChooser();
 
-        /*this.add(TEXTPANE);*/
         JScrollPane scrollPane = new JScrollPane(TEXTPANE);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane);
@@ -607,20 +617,39 @@ public class JavaTextEditor extends JFrame {
         colorMenu.add(moreColorsItem);
 
         /************* Create the CheckboxMenuItems for the viewMenu **************/
-        lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
-        lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);
+        /*lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
+        lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);*/
+        zoomMenu = new JMenu("Zoom...");
+        zoomMenu.setFont(menuFont);
+
+        zoomInAction = new ZoomInAction(zoomInIcon, this);
+        zoomOutAction = new ZoomOutAction(zoomOutIcon, this);
+        zoomDefaultAction = new ZoomDefaultAction(zoomNoneIcon, this);
+
+        zoomInItem = new JMenuItem(zoomInAction);
+        zoomOutItem = new JMenuItem(zoomOutAction);
+        zoomDefaultItem = new JMenuItem(zoomDefaultAction);
+
 
         statusBarAction = new StatusBarAction(statusBarIcon, this);
         statusBarCheckboxItem = new JCheckBoxMenuItem(statusBarAction);
 
-        lineNumberCheckboxItem.setFont(menuItemFont);
+        /*lineNumberCheckboxItem.setFont(menuItemFont);*/
+        zoomInItem.setFont(menuItemFont);
+        zoomOutItem.setFont(menuItemFont);
+        zoomDefaultItem.setFont(menuItemFont);
         statusBarCheckboxItem.setFont(menuItemFont);
 
-        lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);
+        /*lineNumberCheckboxItem.setSelected(HAS_LINE_NUMBERS);*/
         statusBarCheckboxItem.setSelected(HAS_STATUS_BAR);
 
         /*viewMenu.add(lineNumberCheckboxItem);*/
         /*viewMenu.addSeparator();*/
+        zoomMenu.add(zoomInItem);
+        zoomMenu.add(zoomOutItem);
+        zoomMenu.add(zoomDefaultItem);
+        viewMenu.add(zoomMenu);
+        viewMenu.addSeparator();
         viewMenu.add(statusBarCheckboxItem);
 
         /************************* helpMenu and its menuItems *************************/
@@ -642,6 +671,20 @@ public class JavaTextEditor extends JFrame {
         helpMenu.add(aboutItem);
 
     }//end of initComponents Method
+
+    /**
+     * centerTheFrame Method - centers the frame within the window
+     */
+    protected void centerTheFrame() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = getSize();
+
+        int xPosition = (screenSize.width - frameSize.width) / 2;
+        int yPosition = (screenSize.height - frameSize.height) / 2;
+
+        setLocation(xPosition, yPosition);
+
+    }//end of centerTheFrame Method
 
 
     /**
