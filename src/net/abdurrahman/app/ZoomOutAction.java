@@ -19,10 +19,20 @@ public class ZoomOutAction extends AbstractAction {
     }//end of ZoomOutAction Class
 
     /**
-     * @param e the event to be processed
+     * @param ae the event to be processed
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Zoom Out");
+    public void actionPerformed(ActionEvent ae) {
+        updateZoomOutAction();
+
     }//end of actionPerformed Method
+
+    public void updateZoomOutAction() {
+        Font currentFont = JavaTextEditor.getTextPane().getFont();
+        Font newFont = new Font(currentFont.getFamily(), currentFont.getStyle(), currentFont.getSize());
+        int newFontSize = currentFont.getSize();
+        newFontSize /= 1.25;
+        JavaTextEditor.TEXTPANE.setFont(new Font(newFont.getFamily(), newFont.getStyle(), newFontSize));
+
+    }//end of updateZoomOutAction Method
 }//end of ZoomOutAction Class
