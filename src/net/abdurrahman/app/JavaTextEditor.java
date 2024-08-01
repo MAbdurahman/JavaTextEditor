@@ -620,7 +620,7 @@ public class JavaTextEditor extends JFrame {
         /*lineNumbersAction = new LineNumbersAction(lineNumberIcon, this);
         lineNumberCheckboxItem = new JCheckBoxMenuItem(lineNumbersAction);*/
         zoomMenu = new JMenu("Zoom...");
-        zoomMenu.setFont(menuFont);
+        zoomMenu.setFont(menuItemFont);
 
         zoomInAction = new ZoomInAction(zoomInIcon, this);
         zoomOutAction = new ZoomOutAction(zoomOutIcon, this);
