@@ -27,6 +27,9 @@ public class ZoomOutAction extends AbstractAction {
 
     }//end of actionPerformed Method
 
+    /**
+     * updateZoomOutAction Method -
+     */
     public void updateZoomOutAction() {
         Font currentFont = JavaTextEditor.getTextPane().getFont();
         Font newFont = new Font(currentFont.getFamily(), currentFont.getStyle(), currentFont.getSize());

@@ -42,6 +42,4 @@ public class ZoomInAction extends AbstractAction {
         JavaTextEditor.TEXTPANE.setFont(new Font(newFont.getFamily(), newFont.getStyle(), newFontSize));
 
     }//end of updateZoomInAction Method
-
-
 }//end of ZoomInAction Class
